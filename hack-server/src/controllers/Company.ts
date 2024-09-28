@@ -6,6 +6,9 @@ const CompanyController = {
     async register(req, res){
         console.log("Request on register company made");
         let {name, email, country, city, target, tags, description, whoWeWant} = req.body;
+        if(await Company.findOne({where: {name: name}})){
+            res.status(400).send();
+        };
         if(!description) description = await ai.description(name, target);
         if(!Array.isArray(tags)) tags = await ai.tags(name, target); 
         await Company.create({

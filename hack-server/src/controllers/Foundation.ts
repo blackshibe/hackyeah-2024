@@ -5,6 +5,9 @@ const FoundationController = {
     async register(req, res){
         console.log("Request on foundation register was made");
         let {id, name, email, city, country, projects, target, tags, description} = req.body;
+        if(await Foundation.findOne({where: {name: name}})){
+            res.status(400).send();
+        };
         if(!description) description = await ai.description(name, target);
         if(!tags) tags = await ai.tags(name, target);
         await Foundation.create({
