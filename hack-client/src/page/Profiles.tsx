@@ -30,7 +30,7 @@ export default function Profiles() {
 					<SimpleGrid style={{ flexDirection: "column" }} cols={1} pb={"xl"}>
 						<Title>Companies</Title>
 						{companies.map((user) => (
-							<Profile user={user} with_link_type={"company"} />
+							<Profile user={user} key={user.id} with_link_type={"company"} />
 						))}
 					</SimpleGrid>
 				</Tabs.Panel>
@@ -38,7 +38,7 @@ export default function Profiles() {
 					<SimpleGrid style={{ flexDirection: "column" }} cols={1} pb={"xl"}>
 						<Title>Foundations</Title>
 						{foundations.map((user) => (
-							<Profile user={user} with_link_type="foundation" />
+							<Profile user={user} key={user.id} with_link_type="foundation" />
 						))}
 					</SimpleGrid>
 				</Tabs.Panel>
