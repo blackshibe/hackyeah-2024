@@ -18,15 +18,11 @@ import {
 	SimpleGrid,
 	Avatar,
 } from "@mantine/core";
-import { randomId, useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
-import { useForm } from "@mantine/form";
-import { RichTextEditor, Link } from "@mantine/tiptap";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import CreateNGOForm from "./component/CreateNGOForm";
 import CreateCompanyForm from "./component/CreateCompanyForm";
 import Profile from "./component/Profile";
+import { companyAccount, ngoAccount, userAccount } from "../types";
 
 function Company({
 	name,
@@ -78,11 +74,8 @@ function Company({
 }
 
 export default function CreateProfile() {
-	const [org_type, set_org_type] = useState("");
-	const [account_data, set_account_data] = useState({});
+	const [account_data, set_account_data] = useState<userAccount | undefined>(undefined);
 	const [step, set_step] = useState(0);
-
-	useEffect(() => {});
 
 	return (
 		<>
@@ -94,7 +87,7 @@ export default function CreateProfile() {
 							<Center style={{ gap: 32 }}>
 								<Company
 									callback={() => {
-										set_org_type("ngo");
+										set_account_data({ type: "ngo" } as ngoAccount); // rest is filled out when the form is filled
 										set_step(1);
 									}}
 									name="An NGO"
@@ -104,7 +97,7 @@ export default function CreateProfile() {
 
 								<Company
 									callback={() => {
-										set_org_type("company");
+										set_account_data({ type: "company" } as companyAccount); // rest is filled out when the form is filled
 										set_step(1);
 									}}
 									name="A Company"
@@ -119,20 +112,20 @@ export default function CreateProfile() {
 					</Stepper.Step>
 					<Stepper.Step label="Second step" description="Tell us about you">
 						<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
-							{org_type === "ngo" ? (
+							{account_data?.type === "ngo" ? (
 								<CreateNGOForm
+									account_data={account_data}
 									finish={(values) => {
 										set_account_data(values);
 										set_step(2);
-										console.log(values);
 									}}
 								/>
 							) : (
 								<CreateCompanyForm
+									account_data={account_data}
 									finish={(values) => {
 										set_account_data(values);
 										set_step(2);
-										console.log(values);
 									}}
 								/>
 							)}
@@ -140,7 +133,15 @@ export default function CreateProfile() {
 					</Stepper.Step>
 					<Stepper.Step label="Final step" description="Done">
 						<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
-							<Profile account_data={account_data} />
+							{account_data && <Profile user={account_data} />}
+							<SimpleGrid cols={2}>
+								<Button color="blue" fullWidth mt="md" radius="md" onClick={() => set_step(1)}>
+									Back
+								</Button>
+								<Button color="blue" fullWidth mt="md" radius="md" onClick={() => {}}>
+									Create profile
+								</Button>
+							</SimpleGrid>
 						</Center>
 					</Stepper.Step>
 					<Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>

@@ -1,12 +1,46 @@
 import { Card, Title, SimpleGrid, TextInput, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { companyAccount, userAccount } from "../../types";
 
-export default function CreateCompanyForm({ finish }: { finish: (account_data: object) => void }) {
+export default function CreateCompanyForm({
+	finish,
+	account_data,
+}: {
+	account_data?: companyAccount;
+	finish: (account_data: companyAccount) => void;
+}) {
 	const form = useForm({
 		mode: "uncontrolled",
-		initialValues: {
-			name: "",
-			email: "",
+		initialValues: account_data,
+		validate: {
+			city: (value) => {
+				if (!value) return "City name is required";
+				if (value.length < 3) return "City name is too short";
+			},
+			country: (value) => {
+				if (!value) return "Country name is required";
+				if (value.length < 3) return "Country name is too short";
+			},
+			email: (value) => {
+				if (!value) return "Email is required";
+				if (!value.includes("@")) return "Invalid email";
+			},
+			name: (value) => {
+				if (!value) return "Name is required";
+				if (value.length < 3) return "Name is too short";
+			},
+			description: (value) => {
+				if (!value) return "Description is required";
+				if (value.length < 3) return "Description is too short";
+			},
+			targets: (value) => {
+				if (!value) return "Targets are required";
+				if (value.length < 3) return "Targets are too short";
+			},
+			agenda: (value) => {
+				if (!value) return "Agenda is required";
+				if (value.length < 3) return "Agenda is too short";
+			},
 		},
 	});
 
@@ -29,7 +63,7 @@ export default function CreateCompanyForm({ finish }: { finish: (account_data: o
 					{...form.getInputProps("name")}
 				/>
 				<TextInput
-					mt="md"
+					mt="xs"
 					placeholder="Email"
 					label="Email"
 					key={form.key("email")}
@@ -52,7 +86,7 @@ export default function CreateCompanyForm({ finish }: { finish: (account_data: o
 					{...form.getInputProps("country")}
 				/>
 				<TextInput
-					mt="md"
+					mt="xs"
 					label="City"
 					placeholder="City"
 					key={form.key("city")}
@@ -62,18 +96,39 @@ export default function CreateCompanyForm({ finish }: { finish: (account_data: o
 			</SimpleGrid>
 
 			<TextInput
-				label="Your organization's target"
-				placeholder="Target"
-				key={form.key("target")}
-				mt={"sm"}
+				label="Your organization's agenda"
+				key={form.key("agenda")}
+				mt={"xs"}
 				required
-				{...form.getInputProps("target")}
+				{...form.getInputProps("agenda")}
+			/>
+
+			<TextInput
+				label="Who you're looking for"
+				key={form.key("targets")}
+				mt={"xs"}
+				required
+				{...form.getInputProps("targets")}
+			/>
+
+			<TextInput
+				label="Your general description"
+				key={form.key("description")}
+				mt={"xs"}
+				required
+				{...form.getInputProps("description")}
 			/>
 
 			<Button
-				mt={"lg"}
+				mt={"xs"}
 				onClick={() => {
-					finish(form.getValues());
+					let valid = form.validate();
+					if (valid.hasErrors) form.setErrors(valid.errors);
+					else
+						finish({
+							...form.getValues(),
+							type: "company",
+						});
 				}}
 			>
 				Submit

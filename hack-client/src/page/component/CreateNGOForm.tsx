@@ -1,13 +1,46 @@
 import { Card, Title, SimpleGrid, TextInput, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useColorScheme } from "@mantine/hooks";
+import { ngoAccount, userAccount } from "../../types";
 
-export default function CreateNGOForm({ finish }: { finish: (account_data: object) => void }) {
+export default function CreateNGOForm({
+	finish,
+	account_data,
+}: {
+	account_data?: ngoAccount;
+	finish: (account_data: ngoAccount) => void;
+}) {
 	const form = useForm({
 		mode: "uncontrolled",
-		initialValues: {
-			name: "",
-			email: "",
+		initialValues: account_data,
+		validate: {
+			city: (value) => {
+				if (!value) return "City name is required";
+				if (value.length < 3) return "City name is too short";
+			},
+			country: (value) => {
+				if (!value) return "Country name is required";
+				if (value.length < 3) return "Country name is too short";
+			},
+			email: (value) => {
+				if (!value) return "Email is required";
+				if (!value.includes("@")) return "Invalid email";
+			},
+			name: (value) => {
+				if (!value) return "Name is required";
+				if (value.length < 3) return "Name is too short";
+			},
+			projects: (value) => {
+				if (!value) return "Projects are required";
+				if (value.length < 3) return "Projects are too short";
+			},
+			target: (value) => {
+				if (!value) return "Target is required";
+				if (value.length < 3) return "Target is too short";
+			},
+			description: (value) => {
+				if (!value) return "Description is required";
+				if (value.length < 3) return "Description is too short";
+			},
 		},
 	});
 
@@ -82,10 +115,25 @@ export default function CreateNGOForm({ finish }: { finish: (account_data: objec
 					{...form.getInputProps("projects")}
 				/>
 
+				<TextInput
+					label="Your description"
+					placeholder="Description"
+					required
+					key={form.key("description")}
+					mt={"sm"}
+					{...form.getInputProps("description")}
+				/>
+
 				<Button
 					mt={"lg"}
 					onClick={() => {
-						finish(form.getValues());
+						let valid = form.validate();
+						if (valid.hasErrors) form.setErrors(valid.errors);
+						else
+							finish({
+								...form.getValues(),
+								type: "ngo",
+							});
 					}}
 				>
 					Submit
