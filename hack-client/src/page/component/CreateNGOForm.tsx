@@ -17,7 +17,7 @@ export default function CreateNGOForm({ finish }: { finish: (account_data: objec
 				Tell us more about your <span style={{ fontWeight: "bold" }}>NGO</span>
 			</Title>
 
-			<form onSubmit={() => {}}>
+			<form>
 				<SimpleGrid
 					cols={2}
 					style={{

@@ -70,7 +70,14 @@ export default function CreateCompanyForm({ finish }: { finish: (account_data: o
 				{...form.getInputProps("target")}
 			/>
 
-			<Button mt={"lg"}>Submit</Button>
+			<Button
+				mt={"lg"}
+				onClick={() => {
+					finish(form.getValues());
+				}}
+			>
+				Submit
+			</Button>
 		</Card>
 	);
 }

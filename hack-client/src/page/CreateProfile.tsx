@@ -19,13 +19,14 @@ import {
 	Avatar,
 } from "@mantine/core";
 import { randomId, useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "@mantine/form";
 import { RichTextEditor, Link } from "@mantine/tiptap";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import CreateNGOForm from "./component/CreateNGOForm";
 import CreateCompanyForm from "./component/CreateCompanyForm";
+import Profile from "./component/Profile";
 
 function Company({
 	name,
@@ -79,8 +80,9 @@ function Company({
 export default function CreateProfile() {
 	const [org_type, set_org_type] = useState("");
 	const [account_data, set_account_data] = useState({});
+	const [step, set_step] = useState(0);
 
-	const [step, set_step] = useState(2);
+	useEffect(() => {});
 
 	return (
 		<>
@@ -138,35 +140,7 @@ export default function CreateProfile() {
 					</Stepper.Step>
 					<Stepper.Step label="Final step" description="Done">
 						<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
-							<Card shadow="sm" padding="lg" radius="md" withBorder>
-								<Card.Section
-									p={"lg"}
-									style={{
-										display: "flex",
-										flexDirection: "row",
-										justifyContent: "center",
-										alignItems: "center",
-										gap: 8,
-									}}
-								>
-									<Avatar alt="it's me" />
-									<Text>Company name</Text>
-								</Card.Section>
-
-								<Group justify="space-between" mt="md" mb="xs">
-									<Text fw={500}>Norway Fjord Adventures</Text>
-									<Badge color="pink">On Sale</Badge>
-								</Group>
-
-								<Text size="sm" c="dimmed">
-									With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-									activities on and around the fjords of Norway
-								</Text>
-
-								<Button color="blue" fullWidth mt="md" radius="md">
-									Book classic tour now
-								</Button>
-							</Card>
+							<Profile account_data={account_data} />
 						</Center>
 					</Stepper.Step>
 					<Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
