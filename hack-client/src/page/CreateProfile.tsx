@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import CreateNGOForm from "./component/CreateNGOForm";
 import CreateCompanyForm from "./component/CreateCompanyForm";
 import Profile from "./component/Profile";
-import { companyAccount, ngoAccount, userAccount } from "../types";
+import { companyAccount, foundationAccount, userAccount } from "../types";
 
 function Company({
 	name,
@@ -87,7 +87,7 @@ export default function CreateProfile() {
 							<Center style={{ gap: 32 }}>
 								<Company
 									callback={() => {
-										set_account_data({ type: "foundation" } as ngoAccount); // rest is filled out when the form is filled
+										set_account_data({ type: "foundation" } as foundationAccount); // rest is filled out when the form is filled
 										set_step(1);
 									}}
 									name="An NGO"
