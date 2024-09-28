@@ -1,24 +1,42 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 
+
 const sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "./database.sqlite"
-});
+})
+// class Company extends Model {};
 
-class Company extends Model {};
 
-Company.init({
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING,
-    },
-    country: {
-        type: DataTypes.STRING
-    }
-}, {
-    sequelize,
-    modelName: "Company"
-});
+
+//     Company.init(, );
+
+const Company = sequelize.define("Company", {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+        },
+        country: {
+            type: DataTypes.STRING
+        },
+        target: {
+            type: DataTypes.STRING
+        },
+        description: {
+            type: DataTypes.STRING
+        },
+        tags: {
+            type: DataTypes.JSON,
+            allowNull: true
+        }
+    }, {});
+sequelize.sync();
+export default Company;

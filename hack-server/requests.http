@@ -1,0 +1,9 @@
+POST http://localhost:3000/company/register
+Content-Type: application/json
+
+{
+    "name": "Microsoft",
+    "email": "example@gmail.com",
+    "country": "America",
+    "target": "We develop and market software, services, and hardware devices that deliver new opportunities, greater convenience, and enhanced value to people's lives."
+}

@@ -1,10 +1,10 @@
 // import { Database } from "./namespace/Database";
-import OpenAI from "openai";
+// import OpenAI from "openai";
 // import { SECRETS } from "./namespace/Secrets";
 import express, { Router, Express } from "express";
 import session from "express-session";
 import dotenv from "dotenv";
-import userRouter from "./routes/user";
+import companyRouter from "./routes/company";
 
 dotenv.config();
 const app = express();
@@ -20,20 +20,20 @@ app.use(
 	})
 );
 
-app.use("/user", userRouter);
+app.use(express.json());
+app.use("/company", companyRouter);
 
-async function lmao() {
-	const openai = new OpenAI({ apiKey: "SECRETS.OPENAI_KEY" });
-	const completion = await openai.chat.completions.create({
-		model: "gpt-4o",
-		messages: [{ role: "user", content: "write a haiku about ai" }],
-	});
+// async function lmao() {
+// 	const openai = new OpenAI({ apiKey: "SECRETS.OPENAI_KEY" });
+// 	const completion = await openai.chat.completions.create({
+// 		model: "gpt-4o",
+// 		messages: [{ role: "user", content: "write a haiku about ai" }],
+// 	});
 
-	console.log(completion.choices[0].message.content);
-}
+// 	console.log(completion.choices[0].message.content);
+// }
 
 app.listen(process.env.PORT, ()=>{
 	console.log("Server listening on port: " + process.env.PORT);
-	
 });
 // Database.save_db();
