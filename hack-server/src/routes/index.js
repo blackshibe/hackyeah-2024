@@ -1,5 +1,5 @@
 import { Router } from "express";
-import CompanyAndFoundationController from "../controllers/CompanyAndFoundation";
+import CompanyAndFoundationController from "../controllers/CompanyAndFoundation.js";
 
 const indexRouter = Router();
 
