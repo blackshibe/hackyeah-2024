@@ -1,6 +1,7 @@
 export type userAccount =
 	| {
-			type: "ngo";
+			type: "foundation";
+			id: number;
 			name: string;
 			email: string;
 			country: string;
@@ -11,6 +12,7 @@ export type userAccount =
 	  }
 	| {
 			type: "company";
+			id: number;
 			name: string;
 			email: string;
 			country: string;
@@ -21,5 +23,5 @@ export type userAccount =
 			projects: string;
 	  };
 
-export type ngoAccount = Extract<userAccount, { type: "ngo" }>;
+export type ngoAccount = Extract<userAccount, { type: "foundation" }>;
 export type companyAccount = Extract<userAccount, { type: "company" }>;

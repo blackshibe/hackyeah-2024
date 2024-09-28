@@ -87,7 +87,7 @@ export default function CreateProfile() {
 							<Center style={{ gap: 32 }}>
 								<Company
 									callback={() => {
-										set_account_data({ type: "ngo" } as ngoAccount); // rest is filled out when the form is filled
+										set_account_data({ type: "foundation" } as ngoAccount); // rest is filled out when the form is filled
 										set_step(1);
 									}}
 									name="An NGO"
@@ -112,7 +112,7 @@ export default function CreateProfile() {
 					</Stepper.Step>
 					<Stepper.Step label="Second step" description="Tell us about you">
 						<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
-							{account_data?.type === "ngo" ? (
+							{account_data?.type === "foundation" ? (
 								<CreateNGOForm
 									account_data={account_data}
 									finish={(values) => {
@@ -168,7 +168,7 @@ export default function CreateProfile() {
 												localStorage.setItem("account", JSON.stringify(account_data));
 												set_step(3);
 											}
-										} else if (account_data.type === "ngo") {
+										} else if (account_data.type === "foundation") {
 											let data = await fetch(`http://localhost:3000/foundation/register`, {
 												method: "POST",
 												headers: {

@@ -20,6 +20,9 @@ import "@mantine/core/styles.css";
 import Profiles from "./page/Profiles";
 import CreateOffer from "./page/CreateOffer";
 import Offers from "./page/Offers";
+import ViewProfile from "./page/ViewProfile";
+import ViewFoundation from "./page/ViewFoundation";
+import ViewCompany from "./page/ViewCompany";
 
 const CONFIG = [
 	{
@@ -42,9 +45,17 @@ const CONFIG = [
 		path: "/create-profile",
 		element: <CreateProfile />,
 	},
+	{
+		path: "/foundation/:id",
+		element: <ViewFoundation />,
+	},
+	{
+		path: "/company/:id",
+		element: <ViewCompany />,
+	},
 ];
 
-const router = createBrowserRouter(CONFIG);
+export const ROUTER = createBrowserRouter(CONFIG);
 const theme = createTheme({
 	fontFamily: "Outfit",
 });
@@ -57,14 +68,14 @@ function MantineRoot() {
 			<AppShell.Header>
 				<Group h="100%" px="md" style={{ justifyContent: "space-between" }}>
 					<Group gap={0}>
-						<Button onClick={() => router.navigate("/")} variant="transparent">
+						<Button onClick={() => ROUTER.navigate("/")} variant="transparent">
 							<Title>Impact.site</Title>
 						</Button>
 						<Divider my="sm" orientation="vertical" />
-						<Button variant="transparent" onClick={() => router.navigate("/offers")}>
+						<Button variant="transparent" onClick={() => ROUTER.navigate("/offers")}>
 							Offers
 						</Button>
-						<Button variant="transparent" onClick={() => router.navigate("/profiles")}>
+						<Button variant="transparent" onClick={() => ROUTER.navigate("/profiles")}>
 							Profiles
 						</Button>
 					</Group>
@@ -74,14 +85,14 @@ function MantineRoot() {
 							Change theme
 						</Button>
 						<Divider my="sm" orientation="vertical" />
-						<Button variant="transparent" onClick={() => router.navigate("/create-profile")}>
+						<Button variant="transparent" onClick={() => ROUTER.navigate("/create-profile")}>
 							Create profile
 						</Button>
 					</Group>
 				</Group>
 			</AppShell.Header>
 			<AppShell.Main>
-				<RouterProvider router={router} />
+				<RouterProvider router={ROUTER} />
 			</AppShell.Main>
 		</AppShell>
 	);
