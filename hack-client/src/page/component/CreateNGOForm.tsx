@@ -132,7 +132,7 @@ export default function CreateNGOForm({
 						else
 							finish({
 								...form.getValues(),
-								type: "ngo",
+								type: "foundation",
 							});
 					}}
 				>
