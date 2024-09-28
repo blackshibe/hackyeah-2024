@@ -156,6 +156,7 @@ export default function CreateProfile() {
 													name: account_data.name,
 													email: account_data.email,
 													country: account_data.country,
+													city: account_data.city,
 													target: account_data.agenda,
 													description: account_data.description,
 													whoWeWant: account_data.target,
@@ -163,8 +164,31 @@ export default function CreateProfile() {
 												}),
 											});
 
-											let json = await data.json();
-											console.log(json);
+											if (data.status === 200) {
+												localStorage.setItem("account", JSON.stringify(account_data));
+												set_step(3);
+											}
+										} else if (account_data.type === "ngo") {
+											let data = await fetch(`http://localhost:3000/foundation/register`, {
+												method: "POST",
+												headers: {
+													"Content-Type": "application/json",
+												},
+												body: JSON.stringify({
+													name: account_data.name,
+													email: account_data.email,
+													country: account_data.country,
+													city: account_data.city,
+													target: account_data.target,
+													projects: account_data.projects,
+													description: account_data.description,
+												}),
+											});
+
+											if (data.status === 200) {
+												localStorage.setItem("account", JSON.stringify(account_data));
+												set_step(3);
+											}
 										}
 									}}
 								>
@@ -173,7 +197,16 @@ export default function CreateProfile() {
 							</SimpleGrid>
 						</Center>
 					</Stepper.Step>
-					<Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
+					<Stepper.Completed>
+						<Center h={"50vh"} style={{ flexDirection: "column", gap: 10 }}>
+							<Title>All done!</Title>
+							<Text>
+								This demo does not include password login. You are logged in as{" "}
+								<b>{account_data?.name} </b> now.
+							</Text>
+							<Button>Create a post</Button>
+						</Center>
+					</Stepper.Completed>
 				</Stepper>
 			</Group>
 		</>

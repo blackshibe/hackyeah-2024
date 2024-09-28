@@ -28,7 +28,7 @@ export default function Profile({ user }: { user: userAccount }) {
 
 				<Group justify="space-between" mb="xs">
 					<Text fw={500}>
-						{user.country} @ {user.name} - {user.email}
+						{user.country} @ {user.city} - {user.email}
 					</Text>
 				</Group>
 
