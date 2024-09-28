@@ -36,8 +36,16 @@ const Company = sequelize.define("Company", {
         whoWeWant: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        rating: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+            defaultValue: 3.0,
+        },
+        opinionNumber: {
+            type: DataTypes.NUMBER,
+            defaultValue: 0
         }
-
     }, {});
 sequelize.sync();
-export default Company;
+export default Company; 

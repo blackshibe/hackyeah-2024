@@ -17,7 +17,7 @@ const FoundationController = {
         res.send();
     },
     async get(req, res){
-        const {id} = req.query;
+        const {id} = req.params;
         console.log("Request on get foundation was made");
         if(id){
             const foundation = await Foundation.findByPk(id);

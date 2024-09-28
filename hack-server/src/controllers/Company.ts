@@ -19,7 +19,7 @@ const CompanyController = {
             target: target,
             description: description,
             tags: tags,
-            whoWeWant: whoWeWant
+            whoWeWant: whoWeWant,
         });
         console.log("User created successfully");
         res.send();
@@ -34,6 +34,7 @@ const CompanyController = {
             res.send(companies);
         }
         console.log("Request on find companies made");
-    }
+    },
+
 }
 export default CompanyController
