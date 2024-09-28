@@ -23,5 +23,5 @@ export type userAccount =
 			projects: string;
 	  };
 
-export type ngoAccount = Extract<userAccount, { type: "foundation" }>;
+export type foundationAccount = Extract<userAccount, { type: "foundation" }>;
 export type companyAccount = Extract<userAccount, { type: "company" }>;

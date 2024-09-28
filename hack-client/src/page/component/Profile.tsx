@@ -25,7 +25,7 @@ export default function Profile({
 	with_link_type?: "foundation" | "company";
 }) {
 	const guts = (
-		<form>
+		<>
 			<Card.Section
 				p={"lg"}
 				style={{
@@ -59,7 +59,7 @@ export default function Profile({
 					<Text>{value}</Text>
 				))}
 			</Group>
-		</form>
+		</>
 	);
 
 	return (

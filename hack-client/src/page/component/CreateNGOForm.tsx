@@ -1,13 +1,13 @@
 import { Card, Title, SimpleGrid, TextInput, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { ngoAccount, userAccount } from "../../types";
+import { foundationAccount, userAccount } from "../../types";
 
 export default function CreateNGOForm({
 	finish,
 	account_data,
 }: {
-	account_data?: ngoAccount;
-	finish: (account_data: ngoAccount) => void;
+	account_data?: foundationAccount;
+	finish: (account_data: foundationAccount) => void;
 }) {
 	const form = useForm({
 		mode: "uncontrolled",
