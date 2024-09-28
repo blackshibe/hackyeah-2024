@@ -1,5 +1,4 @@
 import { DataTypes, Sequelize } from "sequelize";
-import Rating from "./Rating";
 
 
 const sequelize = new Sequelize({

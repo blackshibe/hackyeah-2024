@@ -25,7 +25,7 @@ const CompanyController = {
         res.send();
     },
     async get(req, res){
-        const {id} = req.query;
+        const {id} = req.params;
         if(id){
             const companies = await Company.findByPk(id);
             res.send(companies);
