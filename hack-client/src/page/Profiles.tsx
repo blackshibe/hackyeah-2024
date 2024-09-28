@@ -1,10 +1,57 @@
-import { Center, Title, Text, Group, List, Grid, SimpleGrid, Tabs } from "@mantine/core";
+import { Center, Title, Text, Group, List, Grid, SimpleGrid, Tabs, Card, TextInput, Rating, Box } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { userAccount } from "../types";
 import Profile from "./component/Profile";
 import { FaBeer, FaPersonBooth } from "react-icons/fa";
+
+type filterTerms = {
+	min_rating: number;
+	terms: string;
+};
+
+function Filter({ set_terms }: { set_terms: (terms: filterTerms) => void }) {
+	return (
+		<Card withBorder mb={"xl"}>
+			<Title order={2}>Filter</Title>
+			<Box style={{ flexDirection: "row", display: "flex", alignItems: "center", gap: 8 }} mt={"sm"}>
+				<Text>Search by keywords</Text>
+				<TextInput
+					placeholder="Term"
+					onChange={(event) => {
+						set_terms({
+							min_rating: 1,
+							terms: event.currentTarget.value,
+						});
+					}}
+				/>
+			</Box>
+
+			<Box style={{ flexDirection: "row", display: "flex", alignItems: "center", gap: 8 }} mt={"sm"}>
+				<Text>Minimum Rating</Text>
+				<Rating defaultValue={2} />
+			</Box>
+		</Card>
+	);
+}
+
 export default function Profiles() {
-	const [[foundations, companies], set_profiles] = useState<[userAccount[], userAccount[]]>([[], []]);
+	const [filter, set_filter] = useState<filterTerms>({ min_rating: 0, terms: "" });
+	let [[foundations, companies], set_profiles] = useState<[userAccount[], userAccount[]]>([[], []]);
+
+	foundations = foundations.filter((user) => {
+		// let passes_rating = user.rating >= filter.min_rating
+		let search_term = filter.terms.toLowerCase();
+		let passes_search =
+			user.name.toLowerCase().includes(search_term) || user.description.toLowerCase().includes(search_term);
+		return passes_search;
+	});
+	companies = companies.filter((user) => {
+		// let passes_rating = user.rating >= filter.min_rating
+		let search_term = filter.terms.toLowerCase();
+		let passes_search =
+			user.name.toLowerCase().includes(search_term) || user.description.toLowerCase().includes(search_term);
+		return passes_search;
+	});
 
 	useEffect(() => {
 		fetch("http://localhost:3000/").then((response) => {
@@ -15,7 +62,7 @@ export default function Profiles() {
 	}, []);
 
 	return (
-		<Group style={{ maxWidth: "900px", margin: "auto" }}>
+		<Group style={{ maxWidth: "600px", margin: "auto" }}>
 			<Tabs defaultValue="companies" w={"100%"}>
 				<Tabs.List>
 					<Tabs.Tab value="companies" leftSection={<FaBeer />}>
@@ -27,6 +74,7 @@ export default function Profiles() {
 				</Tabs.List>
 
 				<Tabs.Panel value="companies" mt={"lg"}>
+					<Filter set_terms={set_filter} />
 					<SimpleGrid style={{ flexDirection: "column" }} cols={1} pb={"xl"}>
 						<Title>Companies</Title>
 						{companies.map((user) => (
@@ -35,6 +83,7 @@ export default function Profiles() {
 					</SimpleGrid>
 				</Tabs.Panel>
 				<Tabs.Panel value="foundations" mt={"lg"}>
+					<Filter set_terms={set_filter} />
 					<SimpleGrid style={{ flexDirection: "column" }} cols={1} pb={"xl"}>
 						<Title>Foundations</Title>
 						{foundations.map((user) => (

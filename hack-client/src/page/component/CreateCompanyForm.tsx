@@ -7,7 +7,7 @@ export default function CreateCompanyForm({
 	account_data,
 }: {
 	account_data?: companyAccount;
-	finish: (account_data: companyAccount) => void;
+	finish: (form_data: companyAccount) => void;
 }) {
 	const form = useForm({
 		mode: "uncontrolled",
@@ -34,7 +34,7 @@ export default function CreateCompanyForm({
 				if (value.length < 3) return "Description is too short";
 			},
 			target: (value) => {
-				if (!value) return "Target is	 required";
+				if (!value) return "Target is required";
 				if (value.length < 3) return "Target is too short";
 			},
 			agenda: (value) => {

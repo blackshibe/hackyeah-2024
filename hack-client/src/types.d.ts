@@ -25,3 +25,11 @@ export type userAccount =
 
 export type foundationAccount = Extract<userAccount, { type: "foundation" }>;
 export type companyAccount = Extract<userAccount, { type: "company" }>;
+
+export type fundingRequest = {
+	id: number;
+	name: string;
+	target: string;
+	description: string;
+	foundation: foundationAccount;
+};

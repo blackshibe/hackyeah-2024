@@ -1,4 +1,19 @@
-import { Center, Title, Text, Group, List, Grid, SimpleGrid, Tabs, Avatar, Card, Rating, Box } from "@mantine/core";
+import {
+	Center,
+	Title,
+	Text,
+	Group,
+	List,
+	Grid,
+	SimpleGrid,
+	Tabs,
+	Avatar,
+	Card,
+	Rating,
+	Box,
+	Textarea,
+	Button,
+} from "@mantine/core";
 import { useEffect, useState } from "react";
 import { foundationAccount, userAccount } from "../types";
 import { useParams } from "react-router-dom";
@@ -24,24 +39,25 @@ export default function ViewCompany() {
 					p={"sm"}
 					style={{
 						display: "flex",
-						flexDirection: "row",
+						alignItems: "baseline",
+						flexDirection: "column",
 						gap: 16,
 					}}
 				>
 					<Avatar alt="it's me" size={200} />
 					<Box style={{}}>
 						<Title>{user.name}</Title>
-						<Text>{user.email}</Text>
+						<Text>{user.target}</Text>
+						<Text size="sm" c="dimmed">
+							{user.email}
+						</Text>
 					</Box>
 
-					<Group style={{}}>
-						<Rating readOnly value={2} />
-						<Text size="sm" c="dimmed">
-							{user.target}
-						</Text>
-					</Group>
+					<Rating readOnly value={2} />
 
 					<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
+						<Text>{user.target}</Text>
+
 						{[user.projects, user.description].map((value) => (
 							<Text>{value}</Text>
 						))}
@@ -51,12 +67,12 @@ export default function ViewCompany() {
 
 			<Group style={{ alignContent: "baseline" }}>
 				<Card withBorder w={"100%"}>
-					<Text opacity={"50%"}>Name - piss@mail.com</Text>
-					<Text>They suck. Seriously, christ</Text>
+					<Textarea placeholder="Comment" />
+					<Button mt={"xs"}>Post...</Button>
 				</Card>
 				<Card withBorder w={"100%"}>
 					<Text opacity={"50%"}>Name - piss@mail.com</Text>
-					<Text>They suck. Seriously, christ</Text>
+					<Text>Comment</Text>
 				</Card>
 			</Group>
 		</SimpleGrid>
