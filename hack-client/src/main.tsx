@@ -23,7 +23,9 @@ const CONFIG = [
 ];
 
 const router = createBrowserRouter(CONFIG);
-const theme = createTheme({});
+const theme = createTheme({
+	fontFamily: "Outfit",
+});
 
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>

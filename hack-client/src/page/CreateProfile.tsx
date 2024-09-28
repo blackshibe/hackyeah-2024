@@ -16,6 +16,7 @@ import {
 	Stepper,
 	TextInput,
 	SimpleGrid,
+	Avatar,
 } from "@mantine/core";
 import { randomId, useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
@@ -23,6 +24,8 @@ import { useForm } from "@mantine/form";
 import { RichTextEditor, Link } from "@mantine/tiptap";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import CreateNGOForm from "./component/CreateNGOForm";
+import CreateCompanyForm from "./component/CreateCompanyForm";
 
 function Company({
 	name,
@@ -36,7 +39,7 @@ function Company({
 	requirements: string[];
 }) {
 	return (
-		<Card shadow="sm" padding={"0"} radius="md" withBorder w="400px" h={"340px"}>
+		<Card shadow="sm" padding={"0"} radius="md" withBorder w="360px" h={"390px"} key={name}>
 			<Card.Section p={"lg"}>
 				<Title>{name}</Title>
 				<Text c="dimmed" fw={500}>
@@ -48,12 +51,16 @@ function Company({
 
 			<Group p={"lg"} justify="space-between" h={"100%"}>
 				<div>
-					<Text size="sm">Before applying for funding, you will fill in:</Text>
+					<Text size="sm" mb={"sm"}>
+						To create your account, you will fill in:
+					</Text>
 
 					<List>
 						{requirements.map((value) => (
 							<ListItem>
-								<Text size="sm">{value}</Text>
+								<Text size="sm" key={value}>
+									{value}
+								</Text>
 							</ListItem>
 						))}
 					</List>
@@ -69,72 +76,11 @@ function Company({
 	);
 }
 
-function CreateAccountForm() {
-	const form = useForm({
-		mode: "uncontrolled",
-		initialValues: {
-			name: "",
-			email: "",
-		},
-	});
-
-	return (
-		<Card shadow="sm" padding={"lg"} radius="md" withBorder>
-			<Title mb={"lg"}>
-				Tell us more about your <span style={{ color: "grey", fontWeight: "bold" }}>NGO</span>
-			</Title>
-			<SimpleGrid
-				cols={2}
-				style={{
-					alignItems: "end",
-				}}
-			>
-				<TextInput
-					label="Organization name"
-					placeholder="Name"
-					key={form.key("name")}
-					{...form.getInputProps("name")}
-				/>
-				<TextInput mt="md" placeholder="Email" key={form.key("email")} {...form.getInputProps("email")} />
-			</SimpleGrid>
-
-			<SimpleGrid
-				cols={2}
-				style={{
-					alignItems: "end",
-				}}
-			>
-				<TextInput
-					label="Country"
-					placeholder="Country"
-					key={form.key("country")}
-					{...form.getInputProps("country")}
-				/>
-				<TextInput
-					mt="md"
-					label="City"
-					placeholder="City"
-					key={form.key("city")}
-					{...form.getInputProps("city")}
-				/>
-			</SimpleGrid>
-
-			<TextInput
-				label="Your organization's target"
-				placeholder="Target"
-				key={form.key("target")}
-				mt={"sm"}
-				{...form.getInputProps("target")}
-			/>
-
-			<Button mt={"lg"}>Submit</Button>
-		</Card>
-	);
-}
-
 export default function CreateProfile() {
 	const [org_type, set_org_type] = useState("");
-	const [step, set_step] = useState(0);
+	const [account_data, set_account_data] = useState({});
+
+	const [step, set_step] = useState(2);
 
 	return (
 		<>
@@ -150,12 +96,8 @@ export default function CreateProfile() {
 										set_step(1);
 									}}
 									name="An NGO"
-									description="Apply for funding and find your funding provider"
-									requirements={[
-										"Your organization's information",
-										"Your objective",
-										"How you can contribute back",
-									]}
+									description="Find funding for your organization"
+									requirements={["Your organization's information", "Your objective"]}
 								/>
 
 								<Company
@@ -173,13 +115,59 @@ export default function CreateProfile() {
 							</Center>
 						</Center>
 					</Stepper.Step>
-					<Stepper.Step label="Second step" description="Verify email">
+					<Stepper.Step label="Second step" description="Tell us about you">
 						<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
-							<CreateAccountForm />
+							{org_type === "ngo" ? (
+								<CreateNGOForm
+									finish={(values) => {
+										set_account_data(values);
+										set_step(2);
+										console.log(values);
+									}}
+								/>
+							) : (
+								<CreateCompanyForm
+									finish={(values) => {
+										set_account_data(values);
+										set_step(2);
+										console.log(values);
+									}}
+								/>
+							)}
 						</Center>
 					</Stepper.Step>
-					<Stepper.Step label="Final step" description="Get full access">
-						Step 3 content: Get full access
+					<Stepper.Step label="Final step" description="Done">
+						<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
+							<Card shadow="sm" padding="lg" radius="md" withBorder>
+								<Card.Section
+									p={"lg"}
+									style={{
+										display: "flex",
+										flexDirection: "row",
+										justifyContent: "center",
+										alignItems: "center",
+										gap: 8,
+									}}
+								>
+									<Avatar alt="it's me" />
+									<Text>Company name</Text>
+								</Card.Section>
+
+								<Group justify="space-between" mt="md" mb="xs">
+									<Text fw={500}>Norway Fjord Adventures</Text>
+									<Badge color="pink">On Sale</Badge>
+								</Group>
+
+								<Text size="sm" c="dimmed">
+									With Fjord Tours you can explore more of the magical fjord landscapes with tours and
+									activities on and around the fjords of Norway
+								</Text>
+
+								<Button color="blue" fullWidth mt="md" radius="md">
+									Book classic tour now
+								</Button>
+							</Card>
+						</Center>
 					</Stepper.Step>
 					<Stepper.Completed>Completed, click back button to get to previous step</Stepper.Completed>
 				</Stepper>
