@@ -33,9 +33,9 @@ export default function CreateCompanyForm({
 				if (!value) return "Description is required";
 				if (value.length < 3) return "Description is too short";
 			},
-			targets: (value) => {
-				if (!value) return "Targets are required";
-				if (value.length < 3) return "Targets are too short";
+			target: (value) => {
+				if (!value) return "Target is	 required";
+				if (value.length < 3) return "Target is too short";
 			},
 			agenda: (value) => {
 				if (!value) return "Agenda is required";
@@ -105,10 +105,10 @@ export default function CreateCompanyForm({
 
 			<TextInput
 				label="Who you're looking for"
-				key={form.key("targets")}
+				key={form.key("target")}
 				mt={"xs"}
 				required
-				{...form.getInputProps("targets")}
+				{...form.getInputProps("target")}
 			/>
 
 			<TextInput

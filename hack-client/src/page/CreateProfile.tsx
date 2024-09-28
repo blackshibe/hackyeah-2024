@@ -138,7 +138,36 @@ export default function CreateProfile() {
 								<Button color="blue" fullWidth mt="md" radius="md" onClick={() => set_step(1)}>
 									Back
 								</Button>
-								<Button color="blue" fullWidth mt="md" radius="md" onClick={() => {}}>
+								<Button
+									color="blue"
+									fullWidth
+									mt="md"
+									radius="md"
+									onClick={async () => {
+										if (!account_data) return;
+
+										if (account_data.type === "company") {
+											let data = await fetch(`http://localhost:3000/company/register`, {
+												method: "POST",
+												headers: {
+													"Content-Type": "application/json",
+												},
+												body: JSON.stringify({
+													name: account_data.name,
+													email: account_data.email,
+													country: account_data.country,
+													target: account_data.agenda,
+													description: account_data.description,
+													whoWeWant: account_data.target,
+													tags: [],
+												}),
+											});
+
+											let json = await data.json();
+											console.log(json);
+										}
+									}}
+								>
 									Create profile
 								</Button>
 							</SimpleGrid>

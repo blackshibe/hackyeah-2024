@@ -34,7 +34,7 @@ export default function Profile({ user }: { user: userAccount }) {
 
 				<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
 					{(user.type === "company"
-						? [`interested in ${user.targets}`, user.projects, user.description]
+						? [`interested in ${user.target}`, user.projects, user.description]
 						: [user.projects, user.description]
 					).map((value) => (
 						<Text>{value}</Text>

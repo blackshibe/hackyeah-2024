@@ -16,7 +16,7 @@ export type userAccount =
 			country: string;
 			agenda: string;
 			city: string;
-			targets: string;
+			target: string;
 			description: string;
 			projects: string;
 	  };
