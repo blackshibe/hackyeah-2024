@@ -1,5 +1,4 @@
-import express, { Router, Express } from "express";
-import session from "express-session";
+import express from "express";
 import dotenv from "dotenv";
 import companyRouter from "./routes/company";
 import foundationRouter from "./routes/foundation";
@@ -8,13 +7,6 @@ import indexRouter from "./routes";
 dotenv.config();
 const app = express();
 
-
-// app.use(session({
-// 	secret: uuid(),
-// 	cookie: {},
-// 	resave: false,
-// 	saveUninitialized: true,
-// }));
 app.use(express.json());
 app.use("/", indexRouter);
 app.use("/company", companyRouter);

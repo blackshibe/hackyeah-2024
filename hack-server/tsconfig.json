@@ -1,11 +1,11 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"noImplicitAny": false,
-		"esModuleInterop": true,
-		"removeComments": true,
-		"preserveConstEnums": true,
-		"sourceMap": true,
-		"skipLibCheck": true
-	}
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true
+  }
 }
