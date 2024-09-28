@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize } from "sequelize";
+import Rating from "./Rating";
 
 
 const sequelize = new Sequelize({
@@ -37,5 +38,7 @@ const Company = sequelize.define("Company", {
             type: DataTypes.STRING,
             allowNull: true
         }
+
     }, {});
+sequelize.sync();
 export default Company;

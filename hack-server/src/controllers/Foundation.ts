@@ -12,6 +12,17 @@ const FoundationController = {
         })
         console.log("Foundation created successfully");
         res.send();
+    },
+    async get(req, res){
+        const {id} = req.query;
+        console.log("Request on get foundation was made");
+        if(id){
+            const foundation = await Foundation.findByPk(id);
+            res.send(foundation);
+        }else{
+            const foundations = await Foundation.findAll();
+            res.send(foundations);
+        }
     }
 }
 export default FoundationController;

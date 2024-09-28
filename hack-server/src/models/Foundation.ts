@@ -6,7 +6,7 @@ const sequelize = new Sequelize({
     storage: "./database.sqlite"
 })
 
-const Foundation = sequelize.define("Company", {
+const Foundation = sequelize.define("Foundation", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -38,4 +38,5 @@ const Foundation = sequelize.define("Company", {
             type: DataTypes.STRING
         }
     }, {});
+sequelize.sync();
 export default Foundation;
