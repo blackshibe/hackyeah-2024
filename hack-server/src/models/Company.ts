@@ -14,7 +14,6 @@ const Company = sequelize.define("Company", {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
         },
         email: {
             type: DataTypes.STRING,
@@ -33,6 +32,9 @@ const Company = sequelize.define("Company", {
         },
         tags: {
             type: DataTypes.JSON,
+        },
+        whoWeWant: {
+            type: DataTypes.STRING,
             allowNull: true
         }
     }, {});

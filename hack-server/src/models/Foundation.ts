@@ -25,15 +25,17 @@ const Foundation = sequelize.define("Company", {
         country: {
             type: DataTypes.STRING
         },
-        target: {
+        projects: {
             type: DataTypes.STRING
         },
-        description: {
+        target: {
             type: DataTypes.STRING
         },
         tags: {
             type: DataTypes.JSON,
-            allowNull: true
+        },
+        description: {
+            type: DataTypes.STRING
         }
     }, {});
 export default Foundation;
