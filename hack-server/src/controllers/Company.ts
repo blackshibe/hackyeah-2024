@@ -1,35 +1,35 @@
+import ai from "../models/ChatGPT";
 import Company from "../models/Company";
-import OpenAI from "openai";
 import dotenv from "dotenv";
 dotenv.config();
-const openai = new OpenAI({ apiKey: process.env.API_KEY });
-
 const CompanyController = {
     async register(req, res){
         console.log("Request on register company made");
-        const {name, email, country, city, target} = req.body;
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o",
-            messages: [
-                { role: "user", content: `Write a description for company ${name} based on this info: ${target}` },
-            ],
-	    });
-
-        const description = completion.choices[0].message.content;
+        let {name, email, country, city, target, tags, description} = req.body;
+        if(!description) description = await ai.description(name, target);
+        if(!Array.isArray(tags)) tags = await ai.tags(name, target); 
         await Company.create({
-            name: "Microsoft", 
-            email: "example@example.com",
-            country: "Poland",
-            target: "Making money",
+            name: name, 
+            email: email,
+            country: country,
+            city: city,
+            target: target,
             description: description,
+            tags: tags
         });
         console.log("User created successfully");
         res.send();
     },
     async get(req, res){
-        const companies = await Company.findAll();
+        const {id} = req.query;
+        if(id){
+            const companies = await Company.findByPk(id);
+            res.send(companies);
+        }else{
+            const companies = await Company.findAll();
+            res.send(companies);
+        }
         console.log("Request on find companies made");
-        res.send(companies);
     }
 }
 export default CompanyController

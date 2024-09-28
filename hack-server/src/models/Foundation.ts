@@ -1,10 +1,17 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 
 
-function initFoundationModel(sequelize){
-    class Foundation extends Model {};
+const sequelize = new Sequelize({
+    dialect: "sqlite",
+    storage: "./database.sqlite"
+})
 
-    Foundation.init({
+const Foundation = sequelize.define("Company", {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -12,14 +19,21 @@ function initFoundationModel(sequelize){
         email: {
             type: DataTypes.STRING,
         },
+        city: {
+            type: DataTypes.STRING,
+        },
         country: {
             type: DataTypes.STRING
+        },
+        target: {
+            type: DataTypes.STRING
+        },
+        description: {
+            type: DataTypes.STRING
+        },
+        tags: {
+            type: DataTypes.JSON,
+            allowNull: true
         }
-    }, {
-        sequelize,
-        modelName: "Foundation"
-    });
-    return Foundation
-}
-
-export default initFoundationModel;
+    }, {});
+export default Foundation;

@@ -5,7 +5,12 @@ import express, { Router, Express } from "express";
 import session from "express-session";
 import dotenv from "dotenv";
 import companyRouter from "./routes/company";
+import { Sequelize } from "sequelize";
 
+const sequelize = new Sequelize({
+    dialect: "sqlite",
+    storage: "./database.sqlite"
+});
 dotenv.config();
 const app = express();
 const api_router = Router();
@@ -22,18 +27,8 @@ app.use(
 
 app.use(express.json());
 app.use("/company", companyRouter);
-
-// async function lmao() {
-// 	const openai = new OpenAI({ apiKey: "SECRETS.OPENAI_KEY" });
-// 	const completion = await openai.chat.completions.create({
-// 		model: "gpt-4o",
-// 		messages: [{ role: "user", content: "write a haiku about ai" }],
-// 	});
-
-// 	console.log(completion.choices[0].message.content);
-// }
-
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT, async ()=>{
 	console.log("Server listening on port: " + process.env.PORT);
+	await sequelize.sync();
+	console.log("All database models has been synced");
 });
-// Database.save_db();

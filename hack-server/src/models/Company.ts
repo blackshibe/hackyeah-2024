@@ -1,15 +1,10 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 
 
 const sequelize = new Sequelize({
     dialect: "sqlite",
     storage: "./database.sqlite"
 })
-// class Company extends Model {};
-
-
-
-//     Company.init(, );
 
 const Company = sequelize.define("Company", {
         id: {
@@ -22,6 +17,9 @@ const Company = sequelize.define("Company", {
             allowNull: false
         },
         email: {
+            type: DataTypes.STRING,
+        },
+        city: {
             type: DataTypes.STRING,
         },
         country: {
@@ -38,5 +36,4 @@ const Company = sequelize.define("Company", {
             allowNull: true
         }
     }, {});
-sequelize.sync();
 export default Company;
