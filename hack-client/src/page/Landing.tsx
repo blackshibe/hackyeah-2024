@@ -1,8 +1,11 @@
+import { AppShell, Group, Burger, Skeleton, Title, Center, List, ListItem } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Link } from "react-router-dom";
+
 export default function Landing() {
 	return (
-		<div className="w-unit-screen bg-red-950 h-screen p-12">
-			<h1>Social Impact Bridge</h1>
-			<p>lmao</p>
-		</div>
+		<Center h={"85vh"}>
+			<Title size="10rem">Impact.Site </Title>
+		</Center>
 	);
 }
