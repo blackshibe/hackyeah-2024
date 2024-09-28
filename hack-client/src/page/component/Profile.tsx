@@ -1,17 +1,9 @@
 import { Card, Avatar, Group, Badge, Text, Button, Title, Grid, SimpleGrid, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
+import { userAccount } from "../../types";
 
-export default function Profile({ account_data }: { account_data: any }) {
-	const [editing, set_editing] = useState(false);
-	const form = useForm({
-		mode: "uncontrolled",
-		initialValues: {
-			description: account_data.description,
-			email: account_data.email,
-		},
-	});
-
+export default function Profile({ user }: { user: userAccount }) {
 	return (
 		<Card shadow="sm" padding="lg" radius="md" withBorder>
 			<form>
@@ -26,46 +18,28 @@ export default function Profile({ account_data }: { account_data: any }) {
 					}}
 				>
 					<Avatar alt="it's me" size={48} />
-					<Title>Company name</Title>
+					<div>
+						<Title>{user.name}</Title>
+						<Text size="sm" c="dimmed">
+							{user.type === "ngo" ? user.target : user.agenda}
+						</Text>
+					</div>
 				</Card.Section>
 
-				<Group justify="space-between" mt="md" mb="xs">
-					<Text fw={500}>Poland @ Gdynia - contact@email.com</Text>
-					{editing ? (
-						<TextInput placeholder="Tag" key={form.key("tag")} {...form.getInputProps("tag")} />
-					) : (
-						<Badge color="teal">GPT Tag</Badge>
-					)}
+				<Group justify="space-between" mb="xs">
+					<Text fw={500}>
+						{user.country} @ {user.name} - {user.email}
+					</Text>
 				</Group>
 
-				{editing ? (
-					<TextInput
-						placeholder="Description"
-						key={form.key("description")}
-						{...form.getInputProps("description")}
-					/>
-				) : (
-					<Text size="sm" c="dimmed">
-						Helping make the world a better place - GPT Description
-					</Text>
-				)}
-
-				<SimpleGrid cols={2}>
-					<Button color="blue" fullWidth mt="md" radius="md" onClick={() => set_editing(!editing)}>
-						{!editing ? "Edit" : "Stop editing"}
-					</Button>
-					<Button
-						color="blue"
-						fullWidth
-						mt="md"
-						radius="md"
-						onClick={() => {
-							console.log(account_data);
-						}}
-					>
-						Create profile
-					</Button>
-				</SimpleGrid>
+				<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
+					{(user.type === "company"
+						? [`interested in ${user.targets}`, user.projects, user.description]
+						: [user.projects, user.description]
+					).map((value) => (
+						<Text>{value}</Text>
+					))}
+				</Group>
 			</form>
 		</Card>
 	);
