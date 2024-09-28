@@ -1,0 +1,9 @@
+POST http://localhost:3000/rating/add
+Content-Type: application/json
+
+{
+    "message": "kocham ta firme",
+    "rate": 4,
+    "CompanyId": 1,
+    "FoundationId": 2
+}

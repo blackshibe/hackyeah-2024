@@ -1,7 +1,7 @@
 {
-  "name": "typescript-boilerplate",
+  "name": "hackyeah-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/index.js",
   "type": "module",
   "license": "MIT",
   "scripts": {

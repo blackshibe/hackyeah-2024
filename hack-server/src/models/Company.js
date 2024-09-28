@@ -39,6 +39,10 @@ const Company = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    averageRating: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
   },
   {}
 );

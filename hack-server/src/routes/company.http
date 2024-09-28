@@ -2,7 +2,7 @@ POST http://localhost:3000/company/register
 Content-Type: application/json
 
 {
-    "name": "Januszex",
+    "name": "yx",
     "email": "example@gmail.com",
     "country": "Poland",
     "target": "We are making bank apps and supporting biggest volleyball team in Rzeszow and one of the biggest in poland",

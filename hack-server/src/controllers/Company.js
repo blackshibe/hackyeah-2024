@@ -22,7 +22,9 @@ const CompanyController = {
         description: description,
         tags: tags,
         whoWeWant: whoWeWant,
+        averageRating: 0,
       });
+
       console.log("User created successfully");
       res.send();
     } catch (err) {
@@ -39,14 +41,6 @@ const CompanyController = {
       res.send(companies);
     }
     console.log("Request on find companies made");
-  },
-  async rate(req, res) {
-    console.log("Request on rate was made");
-    const { newRating, companyName } = req.body;
-    await Company.update(
-      { rating: newRating },
-      { where: { name: companyName } }
-    );
   },
 };
 export default CompanyController;

@@ -2,7 +2,7 @@ POST http://localhost:3000/foundation/register
 Content-Type: application/json
 
 {
-    "name": "WOSP",
+    "name": "siepomag",
     "email": "example@outlook.com",
     "country": "Poland",
     "target": "We are supporting biggest hospitals in poland by providing medical resources",
