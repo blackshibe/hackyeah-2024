@@ -1,18 +1,22 @@
-
 import express, { Router, Express } from "express";
 import session from "express-session";
 import dotenv from "dotenv";
 import companyRouter from "./routes/company";
 import foundationRouter from "./routes/foundation";
-import { Sequelize } from "sequelize";
-
+import indexRouter from "./routes";
 
 dotenv.config();
 const app = express();
 
 
-
+// app.use(session({
+// 	secret: uuid(),
+// 	cookie: {},
+// 	resave: false,
+// 	saveUninitialized: true,
+// }));
 app.use(express.json());
+app.use("/", indexRouter);
 app.use("/company", companyRouter);
 app.use("/foundation", foundationRouter);
 app.listen(process.env.PORT, async ()=>{
