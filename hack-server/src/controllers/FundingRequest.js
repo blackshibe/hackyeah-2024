@@ -1,4 +1,4 @@
-import FundingRequest from "../models/FundingRequest";
+import FundingRequest from "../models/FundingRequest.js";
 
 const FundingRequestController = {
   async get(req, res) {
@@ -9,5 +9,10 @@ const FundingRequestController = {
   },
   async add(req, res) {
     console.log("Request on add funding request was made");
+    const { title, target, description, FoundationId } = req.body;
+    await FundingRequest.create({ title, target, description, FoundationId });
+    console.log("Funding request added successfully");
+    res.send();
   },
 };
+export default FundingRequestController;

@@ -24,4 +24,5 @@ const FundingRequest = sequelize.define(
   },
   {}
 );
+sequelize.sync();
 export default FundingRequest;
