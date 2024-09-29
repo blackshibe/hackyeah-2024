@@ -2,10 +2,9 @@ POST http://localhost:3000/foundation/register
 Content-Type: application/json
 
 {
-    "name": "niepomagajmy",
-    "email": "example@outlook.com",
-    "country": "Poland",
-    "target": "We are supporting biggest hospitals in poland by providing medical resources",
-    "projects": "We are making our grand-final's events where we are collecting money",
-    "description": "Jerzy Owsiak is our owner"
+    "name": "German Cancer Aid",
+    "email": "krebshilfe@infonetz-krebs.de",
+    "country": "Germany",
+    "target": "Cancer fighting international non-profit organisation",
+    "projects": "We've helped a lot of people with different types of cancer in the past"
 }

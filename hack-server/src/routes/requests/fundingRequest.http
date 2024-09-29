@@ -2,8 +2,8 @@ POST http://localhost:3000/fundingRequest/
 Content-Type: application/json
 
 {
-    "title": "lorem ipsum dolor sit amet",
-    "target": "cel",
-    "description": "lorem ipsum opisum",
-    "FoundationId": 2
+    "title": "Hair for children after chemotherapy",
+    "target": "Helping children to retrieve faster from cancer",
+    "description": "We want to donate hair to hospitals in germany",
+    "FoundationId": 5
 }

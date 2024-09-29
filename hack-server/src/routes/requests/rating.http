@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
     "message": "kocham ta firme",
-    "rate": 2,
+    "rate": 1,
     "CompanyId": 2,
     "FoundationId": 1,
     "author": "company"
