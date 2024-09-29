@@ -202,7 +202,7 @@ export default function CreateProfile() {
 						<Title>All done!</Title>
 						<Text>
 							This demo does not include password login. You are logged in as <b>{account_data?.name} </b>{" "}
-							now.
+							now. To log out, delete browser data for this website or switch browsers.
 						</Text>
 						{account_data?.type === "foundation" && (
 							<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>
