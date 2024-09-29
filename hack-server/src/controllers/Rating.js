@@ -63,12 +63,14 @@ const RatingController = {
     const { CompanyId, FoundationId } = req.params;
     console.log("Request on get ratings was made");
     if (CompanyId) {
-      const ratings = await Rating.findAll({ where: { CompanyId: CompanyId } });
+      const ratings = await Rating.findAll({
+        where: { CompanyId: CompanyId, authorName: "foundation" },
+      });
       res.send(ratings);
     }
     if (FoundationId) {
       const ratings = await Rating.findAll({
-        where: { FoundationId: FoundationId },
+        where: { FoundationId: FoundationId, authorName: "company" },
       });
       res.send(ratings);
     }
