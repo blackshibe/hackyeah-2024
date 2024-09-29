@@ -4,4 +4,5 @@ import CompanyAndFoundationController from "../controllers/CompanyAndFoundation.
 const indexRouter = Router();
 
 indexRouter.get("/", CompanyAndFoundationController.get);
+indexRouter.post("/description", CompanyAndFoundationController.getDesc);
 export default indexRouter;
