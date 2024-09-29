@@ -10,7 +10,7 @@ export default function DisplayCoolTextEditorContent({ content }: { content: str
 	});
 
 	return (
-		<RichTextEditor editor={editor}>
+		<RichTextEditor editor={editor} style={{ border: 0 }}>
 			<RichTextEditor.Content />
 		</RichTextEditor>
 	);
