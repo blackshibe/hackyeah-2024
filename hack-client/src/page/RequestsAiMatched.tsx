@@ -54,17 +54,17 @@ function FoundationRequest({ request }: { request: fundingRequest }) {
 	);
 }
 
-export default function Requests() {
+export default function RequestsAiMatched() {
 	const session = useSession();
 	const [filter, set_filter] = useState<filterTerms>({ min_rating: 0, terms: "" });
 	const [loading, set_loading_visible] = useState(true);
 	let [requests, set_requests] = useState<fundingRequest[]>([]);
 
 	useEffect(() => {
-		fetch("/api/fundingRequest")
+		fetch(`/api/fundingRequest/match?id=${session?.id}`, {})
 			.then((res) => res.json())
 			.then((data) => {
-				set_requests(data);
+				set_requests(data?.matchingProjects ?? []);
 				set_loading_visible(false);
 			});
 	}, []);
@@ -93,10 +93,6 @@ export default function Requests() {
 				<Filter filter={filter} set_filter={set_filter} />
 				{session?.type === "foundation" && (
 					<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>
-				)}
-
-				{session?.type === "company" && (
-					<Button onClick={() => ROUTER.navigate("/personalized-requests")}>AI Match</Button>
 				)}
 
 				<Title>Financing Requests</Title>

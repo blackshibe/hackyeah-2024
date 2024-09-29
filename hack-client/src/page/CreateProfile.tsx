@@ -17,6 +17,7 @@ import {
 	TextInput,
 	SimpleGrid,
 	Avatar,
+	LoadingOverlay,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import CreateNGOForm from "./component/CreateNGOForm";
@@ -77,9 +78,12 @@ function Company({
 export default function CreateProfile() {
 	const [account_data, set_account_data] = useState<userAccount | undefined>(undefined);
 	const [step, set_step] = useState(0);
+	const [loading, set_loading] = useState(false);
 
 	return (
 		<Group maw={"900px"} style={{ margin: "auto" }}>
+			<LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+
 			<Stepper active={step} p={"lg"} w={"100%"}>
 				<Stepper.Step label="First step" description="Pick an organization type">
 					<Center mih={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
@@ -142,6 +146,23 @@ export default function CreateProfile() {
 								radius="md"
 								onClick={async () => {
 									if (!account_data) return;
+
+									if (!account_data.description) {
+										set_loading(true);
+										let content = await fetch("/api/description", {
+											method: "POST",
+											headers: {
+												"Content-Type": "application/json",
+											},
+											body: JSON.stringify({
+												name: account_data.name,
+												target: account_data.target,
+											}),
+										});
+
+										account_data.description = (await content.json()).description;
+										set_loading(false);
+									}
 
 									if (account_data.type === "company") {
 										let data = await fetch(`/api/company/register`, {

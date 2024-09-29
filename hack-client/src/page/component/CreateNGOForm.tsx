@@ -1,4 +1,4 @@
-import { Card, Title, SimpleGrid, TextInput, Text, Button } from "@mantine/core";
+import { Card, Title, SimpleGrid, TextInput, Text, Button, Box } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { foundationAccount, userAccount } from "../../types";
 import CoolTextEditor from "./CoolTextEditor";
@@ -37,10 +37,6 @@ export default function CreateNGOForm({
 			target: (value) => {
 				if (!value) return "Target is required";
 				if (value.length < 3) return "Target is too short";
-			},
-			description: (value) => {
-				if (!value) return "Description is required";
-				if (value.length < 3) return "Description is too short";
 			},
 		},
 	});
@@ -124,20 +120,24 @@ export default function CreateNGOForm({
 					}}
 				/>
 
-				<Button
-					mt={"lg"}
-					onClick={() => {
-						let valid = form.validate();
-						if (valid.hasErrors) form.setErrors(valid.errors);
-						else
-							finish({
-								...form.getValues(),
-								type: "foundation",
-							});
-					}}
-				>
-					Submit
-				</Button>
+				<Box style={{ flexDirection: "row", display: "flex", alignItems: "baseline", gap: 8 }}>
+					<Button
+						mt={"lg"}
+						onClick={() => {
+							let valid = form.validate();
+							if (valid.hasErrors) form.setErrors(valid.errors);
+							else
+								finish({
+									...form.getValues(),
+									type: "foundation",
+								});
+						}}
+					>
+						Submit
+					</Button>
+
+					<Text>You don't need to fill out the description field - AI can do it for you.</Text>
+				</Box>
 			</form>
 		</Card>
 	);

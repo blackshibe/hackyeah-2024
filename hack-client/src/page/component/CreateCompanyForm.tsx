@@ -120,20 +120,24 @@ export default function CreateCompanyForm({
 				}}
 			/>
 
-			<Button
-				mt={"lg"}
-				onClick={() => {
-					let valid = form.validate();
-					if (valid.hasErrors) form.setErrors(valid.errors);
-					else
-						finish({
-							...form.getValues(),
-							type: "company",
-						});
-				}}
-			>
-				Submit
-			</Button>
+			<Box style={{ flexDirection: "row", display: "flex", alignItems: "baseline", gap: 8 }}>
+				<Button
+					mt={"lg"}
+					onClick={() => {
+						let valid = form.validate();
+						if (valid.hasErrors) form.setErrors(valid.errors);
+						else
+							finish({
+								...form.getValues(),
+								type: "company",
+							});
+					}}
+				>
+					Submit
+				</Button>
+
+				<Text>You don't need to fill out the description field - AI can do it for you.</Text>
+			</Box>
 		</Card>
 	);
 }

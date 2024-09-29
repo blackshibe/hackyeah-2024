@@ -33,6 +33,7 @@ import useSession from "./page/hook/useSession";
 import Requests from "./page/Requests";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import useNavigateToOwnPage from "./page/hook/useNavigateToOwnPage";
+import RequestsAiMatched from "./page/RequestsAiMatched";
 
 const CONFIG = [
 	{
@@ -62,6 +63,10 @@ const CONFIG = [
 	{
 		path: "/company/:id",
 		element: <ViewCompany />,
+	},
+	{
+		path: "/personalized-requests",
+		element: <RequestsAiMatched />,
 	},
 ];
 
