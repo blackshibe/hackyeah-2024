@@ -6,7 +6,16 @@ const RatingController = {
     const { message, rate, CompanyId, FoundationId, author } = req.body;
     console.log("Request on add rating was made");
     try {
-      await Rating.create({ message, rate, CompanyId, FoundationId, author });
+      const authorName = await Company.findByPk(CompanyId);
+
+      await Rating.create({
+        message,
+        rate,
+        CompanyId,
+        FoundationId,
+        author,
+        authorName: authorName.dataValues.name,
+      });
       if (author === "company") {
         const { count } = await Rating.findAndCountAll({
           where: { CompanyId: CompanyId },

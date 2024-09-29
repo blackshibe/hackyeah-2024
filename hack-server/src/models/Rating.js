@@ -18,6 +18,9 @@ const Rating = sequelize.define("Rating", {
   author: {
     type: ENUM("company", "foundation"),
   },
+  authorName: {
+    type: DataTypes.STRING,
+  },
 });
 sequelize.sync();
 export default Rating;
