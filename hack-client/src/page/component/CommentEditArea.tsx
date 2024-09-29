@@ -7,7 +7,7 @@ export function CommentEditArea({ id, type }: { id: number; type: "foundation" |
 	const [comment, set_comment] = useState("");
 	const session = useSession();
 
-	if (id === session?.id || type === session?.type)
+	if ((id === session?.id && type === session.type) || type === session?.type)
 		return (
 			<Card withBorder w={"100%"}>
 				You can't give comments to yourself or the same account type
