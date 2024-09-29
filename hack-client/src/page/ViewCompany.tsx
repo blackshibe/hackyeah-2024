@@ -26,6 +26,7 @@ export default function ViewCompany() {
 	const [comments, set_comments] = useState<rating[]>([]);
 	const [loading, set_loading_visible] = useState(true);
 
+	const avg_rating = comments.reduce((acc, value) => acc + value.rate, 0) / comments.length;
 	const params = useParams();
 
 	useEffect(() => {
@@ -69,7 +70,7 @@ export default function ViewCompany() {
 						</Text>
 					</Box>
 
-					<Rating readOnly value={user.averageRating} />
+					<Rating readOnly value={avg_rating} />
 					<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
 						<Text>{user.target}</Text>
 

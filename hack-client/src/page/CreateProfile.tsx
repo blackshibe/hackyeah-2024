@@ -117,22 +117,24 @@ export default function CreateProfile() {
 							<CreateNGOForm
 								account_data={account_data}
 								finish={async (values) => {
-									if (!values.description) {
-										set_loading(true);
-										let content = await fetch("/api/description", {
-											method: "POST",
-											headers: {
-												"Content-Type": "application/json",
-											},
-											body: JSON.stringify({
-												name: values.name,
-												target: values.target,
-											}),
-										});
+									try {
+										if (!values.description) {
+											set_loading(true);
+											let content = await fetch("/api/description", {
+												method: "POST",
+												headers: {
+													"Content-Type": "application/json",
+												},
+												body: JSON.stringify({
+													name: values.name,
+													target: values.target,
+												}),
+											});
 
-										values.description = (await content.json()).description;
-										set_loading(false);
-									}
+											values.description = await content.text();
+											set_loading(false);
+										}
+									} catch (e) {}
 
 									set_account_data(values);
 									set_step(2);
@@ -142,22 +144,24 @@ export default function CreateProfile() {
 							<CreateCompanyForm
 								account_data={account_data}
 								finish={async (values) => {
-									if (!values.description) {
-										set_loading(true);
-										let content = await fetch("/api/description", {
-											method: "POST",
-											headers: {
-												"Content-Type": "application/json",
-											},
-											body: JSON.stringify({
-												name: values.name,
-												target: values.target,
-											}),
-										});
+									try {
+										if (!values.description) {
+											set_loading(true);
+											let content = await fetch("/api/description", {
+												method: "POST",
+												headers: {
+													"Content-Type": "application/json",
+												},
+												body: JSON.stringify({
+													name: values.name,
+													target: values.target,
+												}),
+											});
 
-										values.description = await content.text();
-										set_loading(false);
-									}
+											values.description = await content.text();
+											set_loading(false);
+										}
+									} catch (e) {}
 
 									set_account_data(values);
 									set_step(2);
