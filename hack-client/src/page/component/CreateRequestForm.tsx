@@ -29,16 +29,16 @@ export default function CreateRequestForm({
 		<Card shadow="sm" padding={"lg"} radius="md" miw={"600px"} withBorder>
 			<ScrollArea h={"100%"}>
 				<Title mb={"lg"} style={{ fontWeight: "normal" }}>
-					Tell us about your <span style={{ fontWeight: "bold" }}></span>
+					Tell us about your <span style={{ fontWeight: "bold" }}>request</span>
 				</Title>
 
 				<TextInput
 					label="Target title"
 					placeholder="Title"
 					required
-					key={form.key("name")}
+					key={form.key("title")}
 					mb={"xs"}
-					{...form.getInputProps("name")}
+					{...form.getInputProps("title")}
 				/>
 
 				<TextInput

@@ -1,6 +1,7 @@
-import { Card, Title, SimpleGrid, TextInput, Button } from "@mantine/core";
+import { Card, Title, SimpleGrid, TextInput, Text, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { foundationAccount, userAccount } from "../../types";
+import CoolTextEditor from "./CoolTextEditor";
 
 export default function CreateNGOForm({
 	finish,
@@ -115,13 +116,12 @@ export default function CreateNGOForm({
 					{...form.getInputProps("projects")}
 				/>
 
-				<TextInput
-					label="Your description"
-					placeholder="Description"
-					required
-					key={form.key("description")}
-					mt={"sm"}
-					{...form.getInputProps("description")}
+				<Text mt={"md"}>Description</Text>
+				<CoolTextEditor
+					content={form.values.description}
+					set_content={(content) => {
+						form.setFieldValue("description", content);
+					}}
 				/>
 
 				<Button

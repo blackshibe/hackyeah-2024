@@ -82,7 +82,7 @@ export default function CreateProfile() {
 		<Group maw={"900px"} style={{ margin: "auto" }}>
 			<Stepper active={step} p={"lg"} w={"100%"}>
 				<Stepper.Step label="First step" description="Pick an organization type">
-					<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
+					<Center mih={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
 						<Title>I am...</Title>
 						<Center style={{ gap: 32 }}>
 							<Company
@@ -108,7 +108,7 @@ export default function CreateProfile() {
 					</Center>
 				</Stepper.Step>
 				<Stepper.Step label="Second step" description="Tell us about you">
-					<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
+					<Center mih={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
 						{account_data?.type === "foundation" ? (
 							<CreateNGOForm
 								account_data={account_data}
@@ -144,7 +144,7 @@ export default function CreateProfile() {
 									if (!account_data) return;
 
 									if (account_data.type === "company") {
-										let data = await fetch(`http://localhost:3000/company/register`, {
+										let data = await fetch(`/api/company/register`, {
 											method: "POST",
 											headers: {
 												"Content-Type": "application/json",
@@ -167,7 +167,7 @@ export default function CreateProfile() {
 											set_step(3);
 										}
 									} else if (account_data.type === "foundation") {
-										let data = await fetch(`http://localhost:3000/foundation/register`, {
+										let data = await fetch(`/api/foundation/register`, {
 											method: "POST",
 											headers: {
 												"Content-Type": "application/json",
@@ -202,7 +202,7 @@ export default function CreateProfile() {
 						<Title>All done!</Title>
 						<Text>
 							This demo does not include password login. You are logged in as <b>{account_data?.name} </b>{" "}
-							now.
+							now. To log out, delete browser data for this website or switch browsers.
 						</Text>
 						{account_data?.type === "foundation" && (
 							<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>

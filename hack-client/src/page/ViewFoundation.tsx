@@ -31,21 +31,21 @@ export default function ViewFoundation() {
 	const params = useParams();
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/fundingRequest/${params.id}`)
+		fetch(`/api/fundingRequest/${params.id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				set_requests(data);
 				set_loading_visible(false);
 			});
 
-		fetch(`http://localhost:3000/foundation/${params.id}`).then((response) => {
+		fetch(`/api/foundation/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
 				set_loading_visible(false);
 			});
 		});
 
-		fetch(`http://localhost:3000/rating/foundation/${params.id}`).then((response) => {
+		fetch(`/api/rating/foundation/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_comments(data);
 			});
@@ -83,11 +83,13 @@ export default function ViewFoundation() {
 						</Group>
 
 						<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
-							{[user.projects, user.description].map((value) => (
+							{[user.projects].map((value) => (
 								<Text>{value}</Text>
 							))}
 						</Group>
 					</Group>
+
+					<DisplayCoolTextEditorContent content={user.description} />
 				</Card>
 
 				<Group style={{ alignContent: "baseline" }}>

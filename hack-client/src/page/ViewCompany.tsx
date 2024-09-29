@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { foundationAccount, rating, userAccount } from "../types";
 import { useParams } from "react-router-dom";
 import { CommentEditArea } from "./component/CommentEditArea";
+import DisplayCoolTextEditorContent from "./component/DisplayCoolTextEditorContent";
 
 export default function ViewCompany() {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
@@ -28,14 +29,14 @@ export default function ViewCompany() {
 	const params = useParams();
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/company/${params.id}`).then((response) => {
+		fetch(`/api/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
 				set_loading_visible(false);
 			});
 		});
 
-		fetch(`http://localhost:3000/rating/company/${params.id}`).then((response) => {
+		fetch(`/api/rating/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				console.log(data);
 				set_comments(data);
@@ -72,10 +73,12 @@ export default function ViewCompany() {
 					<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
 						<Text>{user.target}</Text>
 
-						{[user.projects, user.description].map((value) => (
+						{[user.projects].map((value) => (
 							<Text>{value}</Text>
 						))}
 					</Group>
+
+					<DisplayCoolTextEditorContent content={user.description} />
 				</Group>
 			</Card>
 

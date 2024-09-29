@@ -22,7 +22,7 @@ function FoundationRequest({ request }: { request: fundingRequest }) {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/foundation/${request.FoundationId}`).then((response) => {
+		fetch(`/api/foundation/${request.FoundationId}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
 				request._foundation = data;
@@ -61,7 +61,7 @@ export default function Requests() {
 	let [requests, set_requests] = useState<fundingRequest[]>([]);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/fundingRequest")
+		fetch("/api/fundingRequest")
 			.then((res) => res.json())
 			.then((data) => {
 				set_requests(data);

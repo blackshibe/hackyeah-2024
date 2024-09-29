@@ -16,6 +16,7 @@ import { useState } from "react";
 import { userAccount } from "../../types";
 import { useInRouterContext } from "react-router-dom";
 import { ROUTER } from "../../main";
+import DisplayCoolTextEditorContent from "./DisplayCoolTextEditorContent";
 
 export default function Profile({
 	user,
@@ -29,6 +30,7 @@ export default function Profile({
 			<Card.Section
 				p={"lg"}
 				style={{
+					minWidth: "400px",
 					display: "flex",
 					flexDirection: "row",
 					justifyContent: "flex-start",
@@ -51,14 +53,15 @@ export default function Profile({
 				</Text>
 			</Group>
 
-			<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
-				{(user.type === "company"
-					? [`interested in ${user.target}`, user.projects, user.description]
-					: [user.projects, user.description]
-				).map((value) => (
-					<Text key={value}>{value}</Text>
-				))}
+			<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }} mb={"xs"}>
+				{(user.type === "company" ? [`interested in ${user.target}`, user.projects] : [user.projects]).map(
+					(value) => (
+						<Text key={value}>{value}</Text>
+					)
+				)}
 			</Group>
+
+			<DisplayCoolTextEditorContent content={user.description} />
 		</>
 	);
 

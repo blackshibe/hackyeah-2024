@@ -1,6 +1,7 @@
-import { Card, Title, SimpleGrid, TextInput, Button } from "@mantine/core";
+import { Card, Title, Text, SimpleGrid, TextInput, Button, Box, UnstyledButton } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { companyAccount, userAccount } from "../../types";
+import CoolTextEditor from "./CoolTextEditor";
 
 export default function CreateCompanyForm({
 	finish,
@@ -111,16 +112,16 @@ export default function CreateCompanyForm({
 				{...form.getInputProps("target")}
 			/>
 
-			<TextInput
-				label="Your general description"
-				key={form.key("description")}
-				mt={"xs"}
-				required
-				{...form.getInputProps("description")}
+			<Text mt={"md"}>Description</Text>
+			<CoolTextEditor
+				content={form.values.description}
+				set_content={(content) => {
+					form.setFieldValue("description", content);
+				}}
 			/>
 
 			<Button
-				mt={"xs"}
+				mt={"lg"}
 				onClick={() => {
 					let valid = form.validate();
 					if (valid.hasErrors) form.setErrors(valid.errors);
