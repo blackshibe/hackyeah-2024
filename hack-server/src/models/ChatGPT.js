@@ -22,9 +22,9 @@ const ai = {
       messages: [
         {
           role: "user",
-          content: `Find from this data in json: ${JSON.stringify(
+          content: `Here you have projects in json: ${JSON.stringify(
             data
-          )} objects that matches best this company: ${JSON.stringify(
+          )} Find from this, projects that matches best this company: ${JSON.stringify(
             company
           )}. Send response in JSON`,
         },

@@ -2,11 +2,11 @@ POST http://localhost:3000/company/register
 Content-Type: application/json
 
 {
-    "name": "Asseco",
-    "email": "info@asseco.pl",
+    "name": "Microsoft",
+    "email": "microsoft@interia.pl",
     "country": "Poland",
-    "target": "We are making bank apps and supporting biggest volleyball team in Rzeszow and one of the biggest in Poland",
-    "description": "We are making money",
-    "whoWeWant": "Children support",
+    "target": "Our mission is to empower every person and every organization on the planet to achieve more. Learn more about our company, who we are and what we value",
+    "description": "Innovation, dependable technology, equality and diversity, corporate social responsibility, philanthropies, and the environment",
+    "whoWeWant": "help people",
     "tags": ["i", "am"]
 }
