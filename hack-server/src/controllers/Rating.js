@@ -21,10 +21,10 @@ const RatingController = {
       });
       if (author === "foundation") {
         const { count } = await Rating.findAndCountAll({
-          where: { CompanyId: CompanyId },
+          where: { CompanyId: CompanyId, author: "company" },
         });
         const sum = await Rating.sum("rate", {
-          where: { CompanyId: CompanyId },
+          where: { CompanyId: CompanyId, author: "company" },
         });
 
         await Company.update(
@@ -37,10 +37,10 @@ const RatingController = {
         );
       } else {
         const { count } = await Rating.findAndCountAll({
-          where: { FoundationId: FoundationId },
+          where: { FoundationId: FoundationId, author: "foundation" },
         });
         const sum = await Rating.sum("rate", {
-          where: { FoundationId: FoundationId },
+          where: { FoundationId: FoundationId, author: "foundation" },
         });
 
         await Foundation.update(

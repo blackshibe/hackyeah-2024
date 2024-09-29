@@ -6,6 +6,6 @@ Content-Type: application/json
     "rate": 1,
     "CompanyId": 2,
     "FoundationId": 1,
-    "author": "company"
+    "author": "foundation"
 }
 
