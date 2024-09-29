@@ -22,7 +22,7 @@ function FoundationRequest({ request }: { request: fundingRequest }) {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/foundation/${request.id}`).then((response) => {
+		fetch(`http://localhost:3000/foundation/${request.FoundationId}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
 				request._foundation = data;
@@ -35,13 +35,16 @@ function FoundationRequest({ request }: { request: fundingRequest }) {
 			withBorder
 			p={0}
 			key={request.id}
-			title={request.name}
+			title={request.title}
 			// subtitle={`Requested by ${request.foundation.name}`}
 			style={{ width: "100%", marginBottom: "1rem" }}
 		>
-			<DisplayCoolTextEditorContent content={request.description} />
-			<Divider orientation="horizontal" w={"100%"} />
 			<UnstyledButton onClick={() => ROUTER.navigate(`/foundation/${user?.id}`)}>
+				<Group p={"md"} style={{ flexDirection: "column", alignItems: "flex-start" }}>
+					<Title>{request.title}</Title>
+					<Text>{request.target}</Text>
+				</Group>
+				<Divider orientation="horizontal" w={"100%"} />
 				<Group p={"md"}>
 					<Avatar />
 					<Text>Requested by {user?.name}</Text>
@@ -66,7 +69,7 @@ export default function Requests() {
 			});
 	}, []);
 
-	requests = requests.filter((request: never) => {
+	requests = requests.filter((request) => {
 		let passes_rating = Math.max(request._foundation?.averageRating ?? 1, 1) >= filter.min_rating;
 		let search_term = filter.terms.toLowerCase();
 		let passes_search =
@@ -86,14 +89,14 @@ export default function Requests() {
 		>
 			<LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
 
-			<Title>Financing Requests</Title>
-
-			{session?.type === "foundation" && (
-				<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>
-			)}
-
 			<SimpleGrid w={"100%"}>
 				<Filter filter={filter} set_filter={set_filter} />
+				{session?.type === "foundation" && (
+					<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>
+				)}
+
+				<Title>Financing Requests</Title>
+
 				{requests.map((request) => (
 					<FoundationRequest request={request} />
 				))}
