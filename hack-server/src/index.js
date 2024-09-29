@@ -16,5 +16,5 @@ app.use("/foundation", foundationRouter);
 app.use("/rating", ratingRouter);
 app.use("/fundingRequest", fundingRequestRouter);
 app.listen(process.env.PORT, () => {
-  console.log("SERVER LISTENING! PORT: " + process.env.PORT);
+	console.log("SERVER LISTENING! PORT: " + process.env.PORT);
 });

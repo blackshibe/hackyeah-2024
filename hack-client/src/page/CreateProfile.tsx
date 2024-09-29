@@ -23,6 +23,7 @@ import CreateNGOForm from "./component/CreateNGOForm";
 import CreateCompanyForm from "./component/CreateCompanyForm";
 import Profile from "./component/Profile";
 import { companyAccount, foundationAccount, userAccount } from "../types";
+import { ROUTER } from "../main";
 
 function Company({
 	name,
@@ -203,7 +204,9 @@ export default function CreateProfile() {
 							This demo does not include password login. You are logged in as <b>{account_data?.name} </b>{" "}
 							now.
 						</Text>
-						<Button>Create a post</Button>
+						{account_data?.type === "foundation" && (
+							<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>
+						)}
 					</Center>
 				</Stepper.Completed>
 			</Stepper>

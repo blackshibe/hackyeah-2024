@@ -1,5 +1,5 @@
 import { Router } from "express";
-import FundingRequestController from "../controllers/fundingRequest.js";
+import FundingRequestController from "../controllers/FundingRequest.js";
 const fundingRequestRouter = Router();
 fundingRequestRouter.get("/", FundingRequestController.get);
 fundingRequestRouter.get("/:id", FundingRequestController.get);

@@ -6,12 +6,15 @@ import CreateNGOForm from "./component/CreateNGOForm";
 import Profile from "./component/Profile";
 import CreateRequestForm from "./component/CreateRequestForm";
 import FundingRequest from "./component/FundingRequest";
+import useSession from "./hook/useSession";
+import { ROUTER } from "../main";
+import useNavigateToOwnPage from "./hook/useNavigateToOwnPage";
 
 export default function CreateFundingRequest() {
 	const [request_data, set_request_data] = useState<fundingRequest | undefined>(undefined);
 	const [step, set_step] = useState(0);
-
-	console.log(request_data);
+	const session = useSession();
+	const navigate_home = useNavigateToOwnPage();
 
 	return (
 		<Group maw={"900px"} style={{ margin: "auto" }}>
@@ -32,12 +35,36 @@ export default function CreateFundingRequest() {
 						<FundingRequest request={request_data!} />
 						<Group style={{ justifyContent: "space-between" }} w={"100%"}>
 							<Button onClick={() => set_step(0)}>Back</Button>
-							<Button>Next</Button>
+							<Button
+								onClick={async () => {
+									let make_post = await fetch("http://localhost:3000/fundingRequest", {
+										method: "POST",
+										headers: {
+											"Content-Type": "application/json",
+										},
+										body: JSON.stringify({
+											title: request_data?.name,
+											target: request_data?.target,
+											description: request_data?.description,
+											FoundationId: session?.id,
+										}),
+									});
+
+									if (make_post.status === 200) {
+										set_step(2);
+									}
+								}}
+							>
+								Next
+							</Button>
 						</Group>
 					</Center>
 				</Stepper.Step>
 				<Stepper.Completed>
-					<Center h={"50vh"} style={{ flexDirection: "column", gap: 10 }}></Center>
+					<Center h={"50vh"} style={{ flexDirection: "column", gap: 10 }}>
+						Done! you can view your post under your profile
+						<Button onClick={navigate_home}> Go back to profile...</Button>
+					</Center>
 				</Stepper.Completed>
 			</Stepper>
 		</Group>

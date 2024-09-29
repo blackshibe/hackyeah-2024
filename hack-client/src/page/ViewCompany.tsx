@@ -78,10 +78,10 @@ export default function ViewCompany() {
 				<CommentEditArea id={user.id} type="company" />
 				{comments.length > 0 ? (
 					comments.map((value) => (
-						<Card withBorder w={"100%"} key={value.author}>
+						<Card withBorder w={"100%"} key={value.authorName}>
 							<Box style={{ gap: 8, flexDirection: "row", alignItems: "center", display: "flex" }}>
 								<Avatar />
-								<Text>{value.author}</Text>
+								<Text>{value.authorName}</Text>
 							</Box>
 							<Box mt={"sm"}>
 								<Rating value={Math.max(value.rate, 1)} readOnly />

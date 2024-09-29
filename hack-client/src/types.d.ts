@@ -38,7 +38,7 @@ export type fundingRequest = {
 
 export type rating = {
 	message: string;
-	author: string;
+	authorName: string;
 	rate: number;
 	CompanyId: string;
 	FoundationId: string;
