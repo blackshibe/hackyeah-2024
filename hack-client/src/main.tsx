@@ -122,9 +122,8 @@ function MantineRoot() {
 					)}
 
 					<Group gap={0}>
-						<Divider my="sm" orientation="vertical" />
 						{!session ? (
-							<Button variant="transparent" size="xs" onClick={() => ROUTER.navigate("/create-profile")}>
+							<Button variant="transparent" onClick={() => ROUTER.navigate("/create-profile")}>
 								Create profile
 							</Button>
 						) : (

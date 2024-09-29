@@ -80,7 +80,7 @@ export default function ViewCompany() {
 				<CommentEditArea id={user.id} type="company" />
 				{comments.map((value) => (
 					<Card withBorder w={"100%"}>
-						<Rating value={value.rate} readOnly />
+						<Rating value={Math.max(value.rate, 1)} readOnly />
 						<Text>{value.message}</Text>
 					</Card>
 				))}

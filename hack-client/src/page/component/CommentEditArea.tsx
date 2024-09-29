@@ -29,12 +29,22 @@ export function CommentEditArea({ id, type }: { id: number; type: "foundation" |
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify({
-							rate: rating,
-							message: comment,
-							CompanyId: type === "company" ? id : undefined,
-							FoundationId: type === "foundation" ? id : undefined,
-						}),
+						body:
+							session.type === "company"
+								? JSON.stringify({
+										rate: rating,
+										author: "company",
+										message: comment,
+										CompanyId: session.id,
+										FoundationId: id,
+								  })
+								: JSON.stringify({
+										rate: rating,
+										author: "foundation",
+										message: comment,
+										CompanyId: id,
+										FoundationId: session.id,
+								  }),
 					}).then(() => {
 						window.location.reload();
 					});

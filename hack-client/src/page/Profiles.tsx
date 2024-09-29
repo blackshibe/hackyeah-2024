@@ -9,7 +9,7 @@ type filterTerms = {
 	terms: string;
 };
 
-function Filter({ set_terms }: { set_terms: (terms: filterTerms) => void }) {
+function Filter({ set_filter, filter }: { filter: filterTerms; set_filter: (terms: filterTerms) => void }) {
 	return (
 		<Card withBorder mb={"xl"}>
 			<Title order={2}>Filter</Title>
@@ -18,7 +18,7 @@ function Filter({ set_terms }: { set_terms: (terms: filterTerms) => void }) {
 				<TextInput
 					placeholder="Term"
 					onChange={(event) => {
-						set_terms({
+						set_filter({
 							min_rating: 1,
 							terms: event.currentTarget.value,
 						});
@@ -28,7 +28,16 @@ function Filter({ set_terms }: { set_terms: (terms: filterTerms) => void }) {
 
 			<Box style={{ flexDirection: "row", display: "flex", alignItems: "center", gap: 8 }} mt={"sm"}>
 				<Text>Minimum Rating</Text>
-				<Rating defaultValue={2} />
+				<Rating
+					defaultValue={0}
+					value={filter.min_rating}
+					onChange={(rating) => {
+						set_filter({
+							min_rating: rating,
+							terms: filter.terms,
+						});
+					}}
+				/>
 			</Box>
 		</Card>
 	);
@@ -39,18 +48,18 @@ export default function Profiles() {
 	let [[foundations, companies], set_profiles] = useState<[userAccount[], userAccount[]]>([[], []]);
 
 	foundations = foundations.filter((user) => {
-		// let passes_rating = user.rating >= filter.min_rating
+		let passes_rating = Math.max(user.averageRating, 1) >= filter.min_rating;
 		let search_term = filter.terms.toLowerCase();
 		let passes_search =
 			user.name.toLowerCase().includes(search_term) || user.description.toLowerCase().includes(search_term);
-		return passes_search;
+		return passes_search && passes_rating;
 	});
 	companies = companies.filter((user) => {
-		// let passes_rating = user.rating >= filter.min_rating
+		let passes_rating = Math.max(user.averageRating, 1) >= filter.min_rating;
 		let search_term = filter.terms.toLowerCase();
 		let passes_search =
 			user.name.toLowerCase().includes(search_term) || user.description.toLowerCase().includes(search_term);
-		return passes_search;
+		return passes_search && passes_rating;
 	});
 
 	useEffect(() => {
@@ -74,7 +83,7 @@ export default function Profiles() {
 				</Tabs.List>
 
 				<Tabs.Panel value="companies" mt={"lg"}>
-					<Filter set_terms={set_filter} />
+					<Filter filter={filter} set_filter={set_filter} />
 					<SimpleGrid style={{ flexDirection: "column" }} cols={1} pb={"xl"}>
 						<Title>Companies</Title>
 						{companies.map((user) => (
@@ -83,7 +92,7 @@ export default function Profiles() {
 					</SimpleGrid>
 				</Tabs.Panel>
 				<Tabs.Panel value="foundations" mt={"lg"}>
-					<Filter set_terms={set_filter} />
+					<Filter filter={filter} set_filter={set_filter} />
 					<SimpleGrid style={{ flexDirection: "column" }} cols={1} pb={"xl"}>
 						<Title>Foundations</Title>
 						{foundations.map((user) => (

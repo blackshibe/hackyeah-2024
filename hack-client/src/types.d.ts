@@ -6,6 +6,7 @@ export type userAccount =
 			email: string;
 			country: string;
 			city: string;
+			averageRating: number;
 			description: string;
 			projects: string;
 			target: string;
@@ -18,6 +19,7 @@ export type userAccount =
 			country: string;
 			agenda: string;
 			city: string;
+			averageRating: number;
 			target: string;
 			description: string;
 			projects: string;

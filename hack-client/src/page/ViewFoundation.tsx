@@ -15,18 +15,26 @@ import {
 	Textarea,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { foundationAccount } from "../types";
+import { foundationAccount, rating } from "../types";
 import { useParams } from "react-router-dom";
 import { CommentEditArea } from "./component/CommentEditArea";
 
 export default function ViewFoundation() {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
+	const [comments, set_comments] = useState<rating[]>([]);
+
 	const params = useParams();
 
 	useEffect(() => {
 		fetch(`http://localhost:3000/foundation/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
+			});
+		});
+
+		fetch(`http://localhost:3000/rating/foundation/${params.id}`).then((response) => {
+			response.json().then((data) => {
+				set_comments(data);
 			});
 		});
 	}, []);
@@ -68,10 +76,12 @@ export default function ViewFoundation() {
 
 			<Group style={{ alignContent: "baseline" }}>
 				<CommentEditArea id={user.id} type="foundation" />
-				<Card withBorder w={"100%"}>
-					<Text opacity={"50%"}>Name - piss@mail.com</Text>
-					<Text>Comment</Text>
-				</Card>
+				{comments.map((value) => (
+					<Card withBorder w={"100%"}>
+						<Rating value={Math.max(value.rate, 1)} readOnly />
+						<Text>{value.message}</Text>
+					</Card>
+				))}
 			</Group>
 		</SimpleGrid>
 	);
