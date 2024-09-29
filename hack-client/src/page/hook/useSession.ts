@@ -1,8 +1,15 @@
+import { useState } from "react";
 import { userAccount } from "../../types";
 
 export default function useSession(): userAccount | undefined {
-	let data = localStorage.getItem("account");
-	if (data) return JSON.parse(data) as userAccount;
+	let [state, set_state] = useState<userAccount | undefined>(undefined);
 
-	return undefined;
+	useState(() => {
+		let data = localStorage.getItem("account");
+		if (data) return set_state(JSON.parse(data) as userAccount);
+
+		return set_state(undefined);
+	});
+
+	return state;
 }

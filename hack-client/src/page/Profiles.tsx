@@ -19,7 +19,7 @@ function Filter({ set_filter, filter }: { filter: filterTerms; set_filter: (term
 					placeholder="Term"
 					onChange={(event) => {
 						set_filter({
-							min_rating: 1,
+							min_rating: filter.min_rating,
 							terms: event.currentTarget.value,
 						});
 					}}

@@ -56,7 +56,7 @@ export default function Profile({
 					? [`interested in ${user.target}`, user.projects, user.description]
 					: [user.projects, user.description]
 				).map((value) => (
-					<Text>{value}</Text>
+					<Text key={value}>{value}</Text>
 				))}
 			</Group>
 		</>

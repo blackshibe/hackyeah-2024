@@ -34,12 +34,13 @@ export default function ViewCompany() {
 
 		fetch(`http://localhost:3000/rating/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
+				console.log(data);
 				set_comments(data);
 			});
 		});
 	}, []);
 
-	if (!user) return <div />;
+	if (!user) return <></>;
 
 	return (
 		<SimpleGrid style={{ maxWidth: "900px", margin: "auto" }} cols={2}>
@@ -75,18 +76,22 @@ export default function ViewCompany() {
 
 			<Group style={{ alignContent: "baseline" }}>
 				<CommentEditArea id={user.id} type="company" />
-				{comments.map((value) => (
-					<Card withBorder w={"100%"}>
-						<Box style={{ gap: 8, flexDirection: "row", alignItems: "center", display: "flex" }}>
-							<Avatar />
-							<Text>{value.author}</Text>
-						</Box>
-						<Box mt={"sm"}>
-							<Rating value={Math.max(value.rate, 1)} readOnly />
-							{value.message}
-						</Box>
-					</Card>
-				))}
+				{comments.length > 0 ? (
+					comments.map((value) => (
+						<Card withBorder w={"100%"} key={value.author}>
+							<Box style={{ gap: 8, flexDirection: "row", alignItems: "center", display: "flex" }}>
+								<Avatar />
+								<Text>{value.author}</Text>
+							</Box>
+							<Box mt={"sm"}>
+								<Rating value={Math.max(value.rate, 1)} readOnly />
+								{value.message}
+							</Box>
+						</Card>
+					))
+				) : (
+					<Text>No comments yet...</Text>
+				)}
 			</Group>
 		</SimpleGrid>
 	);
