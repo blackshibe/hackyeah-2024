@@ -29,7 +29,12 @@ const FundingRequestController = {
     console.log("Request on get matched funding requests was made");
     const fundingRequests = await FundingRequest.findAll();
     const company = (await Company.findByPk(id)).dataValues;
-    const result = await ai.matchToData(fundingRequests, company);
+    let result;
+    try {
+      result = await ai.matchToData(fundingRequests, company);
+    } catch (error) {
+      console.log("ERROR!", error);
+    }
     console.log("request made successfully");
     res.send(JSON.parse(result));
   },
