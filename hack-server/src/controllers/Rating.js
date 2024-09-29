@@ -1,4 +1,5 @@
 import Company from "../models/Company.js";
+import Foundation from "../models/Foundation.js";
 import Rating from "../models/Rating.js";
 
 const RatingController = {
@@ -16,7 +17,7 @@ const RatingController = {
         author,
         authorName: authorName.dataValues.name,
       });
-      if (author === "company") {
+      if (author === "foundation") {
         const { count } = await Rating.findAndCountAll({
           where: { CompanyId: CompanyId },
         });
@@ -40,7 +41,7 @@ const RatingController = {
           where: { FoundationId: FoundationId },
         });
 
-        await Company.update(
+        await Foundation.update(
           {
             averageRating: sum / count,
           },

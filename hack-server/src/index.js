@@ -5,10 +5,12 @@ import foundationRouter from "./routes/foundation.js";
 import indexRouter from "./routes/index.js";
 import ratingRouter from "./routes/rating.js";
 import fundingRequestRouter from "./routes/fundingRequest.js";
+import cors from "cors";
 
 dotenv.config();
 const app = express();
 
+app.use(cors({}));
 app.use(express.json());
 app.use("/", indexRouter);
 app.use("/company", companyRouter);
@@ -16,5 +18,5 @@ app.use("/foundation", foundationRouter);
 app.use("/rating", ratingRouter);
 app.use("/fundingRequest", fundingRequestRouter);
 app.listen(process.env.PORT, () => {
-	console.log("SERVER LISTENING! PORT: " + process.env.PORT);
+  console.log("SERVER LISTENING! PORT: " + process.env.PORT);
 });
