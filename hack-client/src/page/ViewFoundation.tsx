@@ -13,6 +13,7 @@ import {
 	Box,
 	Button,
 	Textarea,
+	LoadingOverlay,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { foundationAccount, rating } from "../types";
@@ -22,6 +23,7 @@ import { CommentEditArea } from "./component/CommentEditArea";
 export default function ViewFoundation() {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
 	const [comments, set_comments] = useState<rating[]>([]);
+	const [loading, set_loading_visible] = useState(true);
 
 	const params = useParams();
 
@@ -29,6 +31,7 @@ export default function ViewFoundation() {
 		fetch(`http://localhost:3000/foundation/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
+				set_loading_visible(false);
 			});
 		});
 
@@ -43,6 +46,8 @@ export default function ViewFoundation() {
 
 	return (
 		<SimpleGrid style={{ maxWidth: "900px", margin: "auto" }} cols={2}>
+			<LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+
 			<Card withBorder>
 				<Group
 					p={"sm"}
