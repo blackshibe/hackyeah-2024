@@ -43,7 +43,7 @@ export default function CreateFundingRequest() {
 											"Content-Type": "application/json",
 										},
 										body: JSON.stringify({
-											title: request_data?.name,
+											title: request_data?.title,
 											target: request_data?.target,
 											description: request_data?.description,
 											FoundationId: session?.id,

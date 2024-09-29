@@ -9,7 +9,7 @@ export default function useSession(): userAccount | undefined {
 		if (data) return set_state(JSON.parse(data) as userAccount);
 
 		return set_state(undefined);
-	}, [localStorage.getItem("account")]);
+	});
 
 	return state;
 }

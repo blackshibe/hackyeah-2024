@@ -64,7 +64,7 @@ export default function CoolTextEditor({
 				</RichTextEditor.ControlsGroup>
 			</RichTextEditor.Toolbar>
 
-			<RichTextEditor.Content h={"200px"} />
+			<RichTextEditor.Content mih={"200px"} />
 		</RichTextEditor>
 	);
 }

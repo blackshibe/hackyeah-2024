@@ -30,7 +30,7 @@ export type companyAccount = Extract<userAccount, { type: "company" }>;
 
 export type fundingRequest = {
 	id: number;
-	name: string;
+	title: string;
 	target: string;
 	description: string;
 	FoundationId: string;
