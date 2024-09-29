@@ -159,7 +159,9 @@ export default function CreateProfile() {
 											}),
 										});
 
+										let json = await data.json();
 										if (data.status === 200) {
+											account_data.id = json.id;
 											localStorage.setItem("account", JSON.stringify(account_data));
 											set_step(3);
 										}
@@ -180,7 +182,9 @@ export default function CreateProfile() {
 											}),
 										});
 
+										let json = await data.json();
 										if (data.status === 200) {
+											account_data.id = json.id;
 											localStorage.setItem("account", JSON.stringify(account_data));
 											set_step(3);
 										}

@@ -25,8 +25,6 @@ export default function ViewCompany() {
 
 	const params = useParams();
 
-	let avg_rating = comments.map((value) => value.rate).reduce((a, b) => a + b, 0) / comments.length;
-
 	useEffect(() => {
 		fetch(`http://localhost:3000/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
@@ -64,8 +62,7 @@ export default function ViewCompany() {
 						</Text>
 					</Box>
 
-					<Rating readOnly value={avg_rating} />
-
+					<Rating readOnly value={user.averageRating} />
 					<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
 						<Text>{user.target}</Text>
 
@@ -80,8 +77,14 @@ export default function ViewCompany() {
 				<CommentEditArea id={user.id} type="company" />
 				{comments.map((value) => (
 					<Card withBorder w={"100%"}>
-						<Rating value={Math.max(value.rate, 1)} readOnly />
-						<Text>{value.message}</Text>
+						<Box style={{ gap: 8, flexDirection: "row", alignItems: "center", display: "flex" }}>
+							<Avatar />
+							<Text>{value.author}</Text>
+						</Box>
+						<Box mt={"sm"}>
+							<Rating value={Math.max(value.rate, 1)} readOnly />
+							{value.message}
+						</Box>
 					</Card>
 				))}
 			</Group>

@@ -63,7 +63,7 @@ export default function ViewFoundation() {
 					</Box>
 
 					<Group>
-						<Rating readOnly value={2} />
+						<Rating readOnly value={user.averageRating} />
 					</Group>
 
 					<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
