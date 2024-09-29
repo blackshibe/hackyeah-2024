@@ -156,7 +156,6 @@ export default function CreateProfile() {
 												target: account_data.agenda,
 												description: account_data.description,
 												whoWeWant: account_data.target,
-												tags: [],
 											}),
 										});
 

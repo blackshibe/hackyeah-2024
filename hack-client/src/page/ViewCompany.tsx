@@ -15,17 +15,28 @@ import {
 	Button,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { foundationAccount, userAccount } from "../types";
+import { foundationAccount, rating, userAccount } from "../types";
 import { useParams } from "react-router-dom";
+import { CommentEditArea } from "./component/CommentEditArea";
 
 export default function ViewCompany() {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
+	const [comments, set_comments] = useState<rating[]>([]);
+
 	const params = useParams();
+
+	let avg_rating = comments.map((value) => value.rate).reduce((a, b) => a + b, 0) / comments.length;
 
 	useEffect(() => {
 		fetch(`http://localhost:3000/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
+			});
+		});
+
+		fetch(`http://localhost:3000/rating/company/${params.id}`).then((response) => {
+			response.json().then((data) => {
+				set_comments(data);
 			});
 		});
 	}, []);
@@ -53,7 +64,7 @@ export default function ViewCompany() {
 						</Text>
 					</Box>
 
-					<Rating readOnly value={2} />
+					<Rating readOnly value={avg_rating} />
 
 					<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
 						<Text>{user.target}</Text>
@@ -66,14 +77,13 @@ export default function ViewCompany() {
 			</Card>
 
 			<Group style={{ alignContent: "baseline" }}>
-				<Card withBorder w={"100%"}>
-					<Textarea placeholder="Comment" />
-					<Button mt={"xs"}>Post...</Button>
-				</Card>
-				<Card withBorder w={"100%"}>
-					<Text opacity={"50%"}>Name - piss@mail.com</Text>
-					<Text>Comment</Text>
-				</Card>
+				<CommentEditArea id={user.id} type="company" />
+				{comments.map((value) => (
+					<Card withBorder w={"100%"}>
+						<Rating value={value.rate} readOnly />
+						<Text>{value.message}</Text>
+					</Card>
+				))}
 			</Group>
 		</SimpleGrid>
 	);

@@ -15,8 +15,9 @@ import {
 	Textarea,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { foundationAccount, userAccount } from "../types";
+import { foundationAccount } from "../types";
 import { useParams } from "react-router-dom";
+import { CommentEditArea } from "./component/CommentEditArea";
 
 export default function ViewFoundation() {
 	const [user, set_user] = useState<foundationAccount | undefined>(undefined);
@@ -66,10 +67,7 @@ export default function ViewFoundation() {
 			</Card>
 
 			<Group style={{ alignContent: "baseline" }}>
-				<Card p={0} withBorder w={"100%"}>
-					<Textarea placeholder="Comment" />
-					<Button mt={"xs"}>Post...</Button>
-				</Card>
+				<CommentEditArea id={user.id} type="foundation" />
 				<Card withBorder w={"100%"}>
 					<Text opacity={"50%"}>Name - piss@mail.com</Text>
 					<Text>Comment</Text>

@@ -33,3 +33,10 @@ export type fundingRequest = {
 	description: string;
 	foundation: foundationAccount;
 };
+
+export type rating = {
+	message: string;
+	rate: number;
+	CompanyId: string;
+	FoundationId: string;
+};
