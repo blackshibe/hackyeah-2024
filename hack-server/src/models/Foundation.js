@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import Rating from "./Rating.js";
+import FundingRequest from "./FundingRequest.js";
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
@@ -45,5 +46,7 @@ const Foundation = sequelize.define(
 );
 Foundation.hasMany(Rating);
 Rating.belongsTo(Foundation);
+Foundation.hasMany(FundingRequest);
+FundingRequest.belongsTo(Foundation);
 sequelize.sync();
 export default Foundation;
