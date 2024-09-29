@@ -2,8 +2,8 @@ POST http://localhost:3000/fundingRequest/
 Content-Type: application/json
 
 {
-    "title": "Hair for children after chemotherapy",
-    "target": "Helping children to retrieve faster from cancer",
-    "description": "We want to donate hair to hospitals in germany",
-    "FoundationId": 5
+    "title": "Donate new volleyball pitch",
+    "target": "help poor children to be better in volleyball",
+    "description": "We want to invest into volleyball",
+    "FoundationId": 2
 }
