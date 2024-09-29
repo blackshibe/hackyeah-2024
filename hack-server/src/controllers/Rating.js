@@ -7,8 +7,10 @@ const RatingController = {
     const { message, rate, CompanyId, FoundationId, author } = req.body;
     console.log("Request on add rating was made");
     try {
-      const authorName = await Company.findByPk(CompanyId);
-
+      let authorName;
+      if (author === "foundation")
+        authorName = await Foundation.findByPk(FoundationId);
+      else authorName = await Company.findByPk(CompanyId);
       await Rating.create({
         message,
         rate,
