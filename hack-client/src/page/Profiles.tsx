@@ -40,7 +40,7 @@ export default function Profiles() {
 	});
 
 	useEffect(() => {
-		fetch("http://localhost:3000/").then((response) => {
+		fetch("/api/").then((response) => {
 			response.json().then((data) => {
 				set_profiles(data);
 				set_loading_visible(false);

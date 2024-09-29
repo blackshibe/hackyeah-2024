@@ -144,7 +144,7 @@ export default function CreateProfile() {
 									if (!account_data) return;
 
 									if (account_data.type === "company") {
-										let data = await fetch(`http://localhost:3000/company/register`, {
+										let data = await fetch(`/api/company/register`, {
 											method: "POST",
 											headers: {
 												"Content-Type": "application/json",
@@ -167,7 +167,7 @@ export default function CreateProfile() {
 											set_step(3);
 										}
 									} else if (account_data.type === "foundation") {
-										let data = await fetch(`http://localhost:3000/foundation/register`, {
+										let data = await fetch(`/api/foundation/register`, {
 											method: "POST",
 											headers: {
 												"Content-Type": "application/json",

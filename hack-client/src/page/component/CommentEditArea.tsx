@@ -31,7 +31,7 @@ export function CommentEditArea({ id, type }: { id: number; type: "foundation" |
 			<Button
 				mt={"xs"}
 				onClick={() => {
-					fetch("http://localhost:3000/rating/add", {
+					fetch("/api/rating/add", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",

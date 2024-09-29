@@ -28,14 +28,14 @@ export default function ViewCompany() {
 	const params = useParams();
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/company/${params.id}`).then((response) => {
+		fetch(`/api/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				set_user(data);
 				set_loading_visible(false);
 			});
 		});
 
-		fetch(`http://localhost:3000/rating/company/${params.id}`).then((response) => {
+		fetch(`/api/rating/company/${params.id}`).then((response) => {
 			response.json().then((data) => {
 				console.log(data);
 				set_comments(data);

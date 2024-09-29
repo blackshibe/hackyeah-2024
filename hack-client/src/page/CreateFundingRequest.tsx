@@ -37,7 +37,7 @@ export default function CreateFundingRequest() {
 							<Button onClick={() => set_step(0)}>Back</Button>
 							<Button
 								onClick={async () => {
-									let make_post = await fetch("http://localhost:3000/fundingRequest", {
+									let make_post = await fetch("/api/fundingRequest", {
 										method: "POST",
 										headers: {
 											"Content-Type": "application/json",
