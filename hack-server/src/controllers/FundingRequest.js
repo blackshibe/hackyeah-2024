@@ -36,7 +36,7 @@ const FundingRequestController = {
       console.log("ERROR!", error);
     }
     console.log("request made successfully");
-    res.send(JSON.parse(result));
+    res.send(result);
   },
 };
 export default FundingRequestController;

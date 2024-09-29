@@ -30,7 +30,11 @@ const ai = {
         },
       ],
     });
-    const matchedObjects = dataToMatchCompletion.choices[0].message.content;
+    const matchedObjects = {
+      matchingProjects: JSON.parse(
+        dataToMatchCompletion.choices[0].message.content
+      ),
+    };
     return matchedObjects;
   },
 };
