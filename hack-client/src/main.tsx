@@ -18,6 +18,8 @@ import {
 	useMantineColorScheme,
 	NavLink,
 	Box,
+	UnstyledButton,
+	Avatar,
 } from "@mantine/core";
 import CreateProfile from "./page/CreateProfile";
 
@@ -30,6 +32,7 @@ import ViewCompany from "./page/ViewCompany";
 import useSession from "./page/hook/useSession";
 import Requests from "./page/Requests";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import useNavigateToOwnPage from "./page/hook/useNavigateToOwnPage";
 
 const CONFIG = [
 	{
@@ -72,6 +75,7 @@ function MantineRoot() {
 	const session = useSession();
 	const is_mobile = useMediaQuery(`(max-width: ${em(750)})`);
 	const [burger_open, set_burger_opened] = useDisclosure(false);
+	const link = useNavigateToOwnPage();
 
 	if (!is_mobile && burger_open) set_burger_opened.close();
 
@@ -127,7 +131,12 @@ function MantineRoot() {
 								Create profile
 							</Button>
 						) : (
-							<Text>Logged in as {session.name}</Text>
+							<UnstyledButton onClick={link}>
+								<Group gap={"xs"}>
+									<Avatar />
+									<Text>{session.name}</Text>
+								</Group>
+							</UnstyledButton>
 						)}
 					</Group>
 				</Group>

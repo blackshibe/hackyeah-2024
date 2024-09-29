@@ -82,8 +82,8 @@ export default function ViewCompany() {
 			<Group style={{ alignContent: "baseline" }}>
 				<CommentEditArea id={user.id} type="company" />
 				{comments.length > 0 ? (
-					comments.map((value) => (
-						<Card withBorder w={"100%"} key={value.authorName}>
+					comments.map((value, index) => (
+						<Card withBorder w={"100%"} key={index}>
 							<Box style={{ gap: 8, flexDirection: "row", alignItems: "center", display: "flex" }}>
 								<Avatar />
 								<Text>{value.authorName}</Text>
