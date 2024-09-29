@@ -116,7 +116,24 @@ export default function CreateProfile() {
 						{account_data?.type === "foundation" ? (
 							<CreateNGOForm
 								account_data={account_data}
-								finish={(values) => {
+								finish={async (values) => {
+									if (!values.description) {
+										set_loading(true);
+										let content = await fetch("/api/description", {
+											method: "POST",
+											headers: {
+												"Content-Type": "application/json",
+											},
+											body: JSON.stringify({
+												name: values.name,
+												target: values.target,
+											}),
+										});
+
+										values.description = (await content.json()).description;
+										set_loading(false);
+									}
+
 									set_account_data(values);
 									set_step(2);
 								}}
@@ -124,7 +141,24 @@ export default function CreateProfile() {
 						) : (
 							<CreateCompanyForm
 								account_data={account_data}
-								finish={(values) => {
+								finish={async (values) => {
+									if (!values.description) {
+										set_loading(true);
+										let content = await fetch("/api/description", {
+											method: "POST",
+											headers: {
+												"Content-Type": "application/json",
+											},
+											body: JSON.stringify({
+												name: values.name,
+												target: values.target,
+											}),
+										});
+
+										values.description = await content.text();
+										set_loading(false);
+									}
+
 									set_account_data(values);
 									set_step(2);
 								}}
@@ -146,23 +180,6 @@ export default function CreateProfile() {
 								radius="md"
 								onClick={async () => {
 									if (!account_data) return;
-
-									if (!account_data.description) {
-										set_loading(true);
-										let content = await fetch("/api/description", {
-											method: "POST",
-											headers: {
-												"Content-Type": "application/json",
-											},
-											body: JSON.stringify({
-												name: account_data.name,
-												target: account_data.target,
-											}),
-										});
-
-										account_data.description = (await content.json()).description;
-										set_loading(false);
-									}
 
 									if (account_data.type === "company") {
 										let data = await fetch(`/api/company/register`, {

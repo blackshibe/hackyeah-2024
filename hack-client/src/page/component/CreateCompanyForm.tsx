@@ -30,10 +30,6 @@ export default function CreateCompanyForm({
 				if (!value) return "Name is required";
 				if (value.length < 3) return "Name is too short";
 			},
-			description: (value) => {
-				if (!value) return "Description is required";
-				if (value.length < 3) return "Description is too short";
-			},
 			target: (value) => {
 				if (!value) return "Target is required";
 				if (value.length < 3) return "Target is too short";

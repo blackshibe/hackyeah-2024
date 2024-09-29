@@ -64,6 +64,7 @@ export default function RequestsAiMatched() {
 		fetch(`/api/fundingRequest/match?id=${session?.id}`, {})
 			.then((res) => res.json())
 			.then((data) => {
+				console.log(data?.matchingProjects ?? []);
 				set_requests(data?.matchingProjects ?? []);
 				set_loading_visible(false);
 			});
@@ -95,7 +96,7 @@ export default function RequestsAiMatched() {
 					<Button onClick={() => ROUTER.navigate("/create-offer")}>Create new offer</Button>
 				)}
 
-				<Title>Financing Requests</Title>
+				<Title>AI Suggestions</Title>
 
 				{requests.map((request) => (
 					<FoundationRequest request={request} />
