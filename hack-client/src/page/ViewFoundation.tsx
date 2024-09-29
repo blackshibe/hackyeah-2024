@@ -83,11 +83,13 @@ export default function ViewFoundation() {
 						</Group>
 
 						<Group style={{ display: "flex", flexDirection: "column", gap: 0, alignItems: "baseline" }}>
-							{[user.projects, user.description].map((value) => (
+							{[user.projects].map((value) => (
 								<Text>{value}</Text>
 							))}
 						</Group>
 					</Group>
+
+					<DisplayCoolTextEditorContent content={user.description} />
 				</Card>
 
 				<Group style={{ alignContent: "baseline" }}>

@@ -82,7 +82,7 @@ export default function CreateProfile() {
 		<Group maw={"900px"} style={{ margin: "auto" }}>
 			<Stepper active={step} p={"lg"} w={"100%"}>
 				<Stepper.Step label="First step" description="Pick an organization type">
-					<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
+					<Center mih={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
 						<Title>I am...</Title>
 						<Center style={{ gap: 32 }}>
 							<Company
@@ -108,7 +108,7 @@ export default function CreateProfile() {
 					</Center>
 				</Stepper.Step>
 				<Stepper.Step label="Second step" description="Tell us about you">
-					<Center h={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
+					<Center mih={"75vh"} style={{ flexDirection: "column", gap: 32 }}>
 						{account_data?.type === "foundation" ? (
 							<CreateNGOForm
 								account_data={account_data}

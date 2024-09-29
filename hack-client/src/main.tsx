@@ -86,7 +86,7 @@ function MantineRoot() {
 			navbar={{ width: 0, breakpoint: "sm", collapsed: { mobile: !burger_open } }}
 		>
 			<AppShell.Header>
-				<Group h="100%" px="md" style={{ justifyContent: "space-between" }}>
+				<Group mih="100%" px="md" style={{ justifyContent: "space-between" }}>
 					{is_mobile ? (
 						<Box>
 							<Burger opened={burger_open} onClick={set_burger_opened.toggle} hiddenFrom="sm" size="sm" />
